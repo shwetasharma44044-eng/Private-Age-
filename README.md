@@ -68,12 +68,12 @@ npm run test:ui
 ![UI Screenshot](image.png)
 
 ### 2. CI/CD Pipeline Success
-*Add a screenshot of your passing GitHub Actions workflow here.*
-![alt text](image-1.png)
+*GitHub Actions CI workflow passing all checks.*
+![CI/CD Pipeline Success](image-3.png)
 
 ### 3. Test Outputs
-*Add a screenshot of your terminal showing passing unit tests for both contract and UI here.*
-![alt text](image-2.png)
+*Passing unit tests for both Compact contract circuits and React UI.*
+![Test Outputs](image-2.png)
 
 ## 📝 Contract Address
 
