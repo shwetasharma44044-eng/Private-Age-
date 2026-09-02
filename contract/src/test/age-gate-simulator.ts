@@ -26,10 +26,10 @@ export class AgeGateSimulator {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       currentZswapLocalState: result.currentZswapLocalState,
       costModel: CostModel.initialCostModel(),
-      currentQueryContext: new QueryContext(
-        result.currentContractState.data,
-        sampleContractAddress(),
-      ),
+      currentQueryContext: {
+        state: result.currentContractState.data,
+        address: sampleContractAddress(),
+      },
     };
   }
 
