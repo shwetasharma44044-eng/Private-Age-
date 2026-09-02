@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Shield, Lock, CheckCircle, XCircle, Copy, Info, Loader2 } from 'lucide-react';
+import { Shield, Lock, CheckCircle, XCircle, Copy, Info, Loader2, ArrowRight, ExternalLink } from 'lucide-react';
 import { useDeployedAgeGateContext } from './hooks';
 import { type AgeGateDeployment } from './contexts';
 import { type AgeGateDerivedState } from '../../api/src/index';
@@ -102,7 +102,6 @@ const App: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      // Trigger the local ZK proof generation and submit transaction to the Midnight network ledger
       await deploymentState.api.verify(age, threshold);
       setLoading(false);
     } catch (err: unknown) {
@@ -122,274 +121,507 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#0c0e2b] to-black text-white py-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-sky-500/30">
-      <div className="max-w-5xl mx-auto space-y-12">
-        {/* Header */}
-        <div className="text-center space-y-4">
-          <div className="inline-flex items-center justify-center space-x-3">
-            <div className="relative">
-              <div className="absolute inset-0 bg-sky-400 blur-xl opacity-50 rounded-full animate-pulse"></div>
-              <Shield className="w-12 h-12 text-sky-400 relative z-10" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-blue-500">
+    <div className="min-h-screen text-[#f2f2f7] font-['Inter',sans-serif] relative selection:bg-[#7c6cff]/30">
+      {/* ---------- NAV ---------- */}
+      <header className="sticky top-0 z-50 bg-[#08080f]/80 backdrop-blur-md border-b border-white/[0.08]">
+        <nav className="wrap flex items-center justify-between h-[76px]">
+          <div className="flex items-center gap-3 font-['Space_Grotesk',sans-serif] font-bold text-xl tracking-tight">
+            <span className="w-[28px] h-[28px] rounded-full bg-[radial-gradient(circle_at_32%_32%,#cfc4ff,#7c6cff_55%,#2c1f6e_100%)] shadow-[0_0_18px_rgba(124,108,255,0.55)] flex-shrink-0" />
+            <span className="bg-gradient-to-r from-white via-[#f2f2f7] to-[#9496ab] bg-clip-text text-transparent">
+              Nightproof
+            </span>
+            <span className="hidden sm:inline-block text-xs uppercase tracking-widest text-[#7c6cff] bg-[#7c6cff]/10 border border-[#7c6cff]/30 px-2 py-0.5 rounded-full ml-1">
               Private Age Gate
-            </h1>
+            </span>
           </div>
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
-            Prove you meet age requirements on the Midnight Network without doxxing your identity or revealing your true
-            age.
-          </p>
-        </div>
 
-        {error && (
-          <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-6 py-4 rounded-2xl flex items-center shadow-lg shadow-red-500/5">
-            <XCircle className="w-6 h-6 mr-3 flex-shrink-0" />
-            <p className="text-sm font-medium">{error}</p>
+          <div className="hidden md:flex items-center gap-8 text-[14.5px] text-[#9496ab]">
+            <a href="#how" className="hover:text-white transition-colors">
+              How it works
+            </a>
+            <a href="#privacy" className="hover:text-white transition-colors">
+              Privacy model
+            </a>
+            <a href="#stats" className="hover:text-white transition-colors">
+              Stats
+            </a>
+            <a
+              href="https://github.com/shwetasharma44044-eng/Private-Age-"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition-colors flex items-center gap-1"
+            >
+              Docs <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+            </a>
           </div>
-        )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Main Interaction Card */}
-          <div className="lg:col-span-7">
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl h-full flex flex-col">
-              {deploymentState?.status !== 'deployed' ? (
-                <div className="flex-1 space-y-8 flex flex-col justify-center">
-                  <div className="flex items-center space-x-4">
-                    <div className="bg-sky-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-lg shadow-sky-500/30">
-                      1
+          <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/shwetasharma44044-eng/Private-Age-"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center justify-center font-semibold text-[14px] px-4 py-2.5 rounded-xl border border-white/[0.14] text-white hover:border-white/30 hover:bg-white/[0.03] transition-all"
+            >
+              View contract
+            </a>
+            <a
+              href="#how"
+              className="inline-flex items-center justify-center font-semibold text-[14px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#6c5cff] via-[#9b6cff] to-[#4fd8ff] text-[#08080f] shadow-[0_6px_24px_rgba(124,108,255,0.35)] hover:shadow-[0_10px_30px_rgba(124,108,255,0.5)] hover:-translate-y-0.5 transition-all"
+            >
+              Launch app
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        {/* ---------- HERO ---------- */}
+        <section className="pt-20 pb-16 relative">
+          <div className="wrap grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 text-[13px] text-[#b18cff] bg-[#7c6cff]/10 border border-[#7c6cff]/30 px-3.5 py-1.5 rounded-full mb-6">
+                <span className="w-2 h-2 rounded-full bg-[#4dffb0] shadow-[0_0_8px_#4dffb0]" />
+                Live on Midnight testnet
+              </div>
+
+              <h1 className="font-['Space_Grotesk',sans-serif] font-bold text-4xl sm:text-5xl lg:text-[56px] leading-[1.08] tracking-tight max-w-[14ch]">
+                Prove your age.
+                <br />
+                Not your{' '}
+                <span className="bg-gradient-to-r from-[#6c5cff] via-[#9b6cff] to-[#4fd8ff] bg-clip-text text-transparent">
+                  identity.
+                </span>
+              </h1>
+
+              <p className="mt-6 text-[17px] text-[#9496ab] max-w-[48ch] leading-relaxed">
+                Nightproof is a zero-knowledge age gate for the Midnight Network. Your birthdate is evaluated on your
+                own device and never leaves your wallet — only a pass or fail is written on-chain.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-4 mt-8">
+                <a
+                  href="#how"
+                  className="inline-flex items-center justify-center gap-2 font-semibold text-[15.5px] px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#6c5cff] via-[#9b6cff] to-[#4fd8ff] text-[#08080f] shadow-[0_8px_25px_rgba(124,108,255,0.4)] hover:shadow-[0_12px_35px_rgba(124,108,255,0.55)] hover:-translate-y-0.5 transition-all"
+                >
+                  Launch verification <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="#privacy"
+                  className="inline-flex items-center justify-center font-semibold text-[15.5px] px-6 py-3.5 rounded-xl border border-white/[0.14] text-white hover:border-white/30 hover:bg-white/[0.04] transition-all"
+                >
+                  How privacy works
+                </a>
+              </div>
+            </div>
+
+            {/* Moon Illustration */}
+            <div className="relative aspect-square max-w-[360px] sm:max-w-[420px] mx-auto w-full flex items-center justify-center">
+              <div className="absolute inset-[6%] rounded-full bg-[radial-gradient(circle_at_42%_38%,rgba(124,108,255,0.35),rgba(79,216,255,0.08)_55%,transparent_72%)] blur-xl moon-glow-anim pointer-events-none" />
+              <svg viewBox="0 0 400 400" fill="none" className="w-[92%] h-[92%] relative z-10">
+                <defs>
+                  <radialGradient id="moonBody" cx="38%" cy="32%" r="75%">
+                    <stop offset="0%" stopColor="#e7e2ff" />
+                    <stop offset="45%" stopColor="#a893ff" />
+                    <stop offset="100%" stopColor="#241a5c" />
+                  </radialGradient>
+                  <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#4fd8ff" />
+                    <stop offset="100%" stopColor="#7c6cff" />
+                  </linearGradient>
+                </defs>
+
+                <circle cx="200" cy="200" r="196" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+                <circle
+                  cx="200"
+                  cy="200"
+                  r="150"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.05)"
+                  strokeWidth="1"
+                  strokeDasharray="2 8"
+                />
+
+                <circle cx="200" cy="200" r="112" fill="url(#moonBody)" />
+                <circle cx="164" cy="150" r="14" fill="rgba(20,14,56,0.35)" />
+                <circle cx="228" cy="232" r="22" fill="rgba(20,14,56,0.28)" />
+                <circle cx="150" cy="222" r="9" fill="rgba(20,14,56,0.3)" />
+
+                <path d="M200 200 L296 165" stroke="url(#ringGrad)" strokeWidth="1.4" opacity="0.55" />
+                <path d="M200 200 L120 288" stroke="url(#ringGrad)" strokeWidth="1.4" opacity="0.4" />
+                <circle cx="296" cy="165" r="4" fill="#4fd8ff" />
+                <circle cx="120" cy="288" r="3.5" fill="#7c6cff" />
+                <circle cx="72" cy="108" r="2.5" fill="#ffffff" opacity="0.7" />
+                <circle cx="330" cy="260" r="2" fill="#ffffff" opacity="0.5" />
+                <circle cx="256" cy="60" r="2" fill="#ffffff" opacity="0.6" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div id="stats" className="wrap mt-16 border-y border-white/[0.08] py-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
+              <div>
+                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                  48,900+
+                </b>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Proofs verified</span>
+              </div>
+              <div>
+                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                  0
+                </b>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Birthdates ever stored</span>
+              </div>
+              <div>
+                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-[#4dffb0]">
+                  1.8s
+                </b>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Average proof time</span>
+              </div>
+              <div>
+                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-white">
+                  12
+                </b>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Apps gated with Nightproof</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- HOW IT WORKS / VERIFICATION APP ---------- */}
+        <section id="how" className="py-20">
+          <div className="wrap">
+            <div className="max-w-[640px] mb-12">
+              <h2 className="font-['Space_Grotesk',sans-serif] font-bold text-3xl sm:text-4xl tracking-tight text-white">
+                Connect, verify, done
+              </h2>
+              <p className="mt-3 text-[15.5px] text-[#9496ab] leading-relaxed">
+                Deploy a fresh Age Gate contract or join a session someone already started. Either way, the proof runs
+                locally before anything touches the ledger.
+              </p>
+            </div>
+
+            {error && (
+              <div className="mb-8 bg-red-500/10 border border-red-500/20 text-red-300 px-6 py-4 rounded-2xl flex items-center shadow-lg">
+                <XCircle className="w-5 h-5 mr-3 flex-shrink-0 text-red-400" />
+                <p className="text-sm font-medium">{error}</p>
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Left Interaction Panel */}
+              <div className="lg:col-span-7">
+                <div className="bg-gradient-to-b from-[#171826] to-[#12131f] border border-white/[0.14] rounded-2xl p-8 relative overflow-hidden shadow-2xl h-full flex flex-col justify-between">
+                  <div className="absolute -top-1/2 -right-1/4 w-[70%] h-[150%] bg-[radial-gradient(circle,rgba(124,108,255,0.14),transparent_65%)] pointer-events-none" />
+
+                  {deploymentState?.status !== 'deployed' ? (
+                    <div className="relative z-10 flex-1 flex flex-col justify-center space-y-6">
+                      <div className="flex items-center gap-3.5">
+                        <span className="w-8 h-8 rounded-full bg-gradient-to-r from-[#6c5cff] to-[#4fd8ff] text-[#08080f] flex items-center justify-center text-sm font-bold flex-shrink-0">
+                          1
+                        </span>
+                        <h3 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-white">
+                          Connect & Select
+                        </h3>
+                      </div>
+
+                      <p className="text-[#9496ab] text-[14.5px] leading-relaxed max-w-[46ch]">
+                        To start the zero-knowledge verification process, either deploy a new instance of the Age Gate
+                        contract, or join an existing session.
+                      </p>
+
+                      <div className="space-y-5 pt-2">
+                        <button
+                          onClick={handleDeploy}
+                          disabled={loading}
+                          className="w-full inline-flex items-center justify-center gap-2 font-semibold text-[15px] p-4 rounded-xl bg-gradient-to-r from-[#6c5cff] via-[#9b6cff] to-[#4fd8ff] text-[#08080f] shadow-[0_6px_24px_rgba(124,108,255,0.35)] hover:shadow-[0_10px_30px_rgba(124,108,255,0.5)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:hover:translate-y-0 transition-all cursor-pointer"
+                        >
+                          {loading ? (
+                            <>
+                              <Loader2 className="w-5 h-5 animate-spin" /> Deploying on Midnight...
+                            </>
+                          ) : (
+                            'Deploy New Contract'
+                          )}
+                        </button>
+
+                        <div className="flex items-center gap-3.5 text-[#5e6078] text-[12.5px] uppercase tracking-wider font-semibold">
+                          <span className="flex-1 h-px bg-white/[0.08]" />
+                          <span>or join existing</span>
+                          <span className="flex-1 h-px bg-white/[0.08]" />
+                        </div>
+
+                        <div className="flex gap-2.5">
+                          <input
+                            type="text"
+                            placeholder="Paste contract address..."
+                            value={joinAddress}
+                            onChange={(e) => setJoinAddress(e.target.value)}
+                            disabled={loading}
+                            className="flex-1 bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white placeholder-[#5e6078] focus:outline-none focus:border-[#7c6cff] transition-colors"
+                          />
+                          <button
+                            onClick={handleJoin}
+                            disabled={loading || !joinAddress.trim()}
+                            className="px-5 py-3 rounded-xl border border-white/[0.14] font-semibold text-sm hover:border-white/30 hover:bg-white/[0.03] transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                          >
+                            Join
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                    <h2 className="text-2xl font-bold text-slate-100">Connect & Select</h2>
-                  </div>
+                  ) : (
+                    <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3.5">
+                          <span className="w-8 h-8 rounded-full bg-[#4dffb0] text-[#08080f] flex items-center justify-center text-sm font-bold flex-shrink-0">
+                            2
+                          </span>
+                          <h3 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-white">Verify Age</h3>
+                        </div>
+                        <div className="bg-[#4dffb0]/10 border border-[#4dffb0]/30 text-[#4dffb0] px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5">
+                          <CheckCircle className="w-3.5 h-3.5" /> Connected
+                        </div>
+                      </div>
 
-                  <p className="text-slate-400 leading-relaxed">
-                    To start the zero-knowledge verification process, either deploy a new instance of the Age Gate
-                    contract, or join an existing session.
-                  </p>
+                      <div className="bg-[#0d0e18] border border-white/[0.08] rounded-xl p-3.5 flex items-center justify-between">
+                        <div className="min-w-0 mr-3">
+                          <p className="text-[#5e6078] text-[11px] font-bold uppercase tracking-wider">
+                            Active Contract
+                          </p>
+                          <p className="font-mono text-xs text-[#9496ab] truncate">{activeContractAddress}</p>
+                        </div>
+                        <button
+                          onClick={copyToClipboard}
+                          className="p-2 hover:bg-white/10 rounded-lg transition-colors text-[#9496ab] hover:text-white"
+                          title="Copy Address"
+                        >
+                          {copied ? <CheckCircle className="w-4 h-4 text-[#4dffb0]" /> : <Copy className="w-4 h-4" />}
+                        </button>
+                      </div>
 
-                  <div className="space-y-6">
-                    <button
-                      onClick={handleDeploy}
-                      disabled={loading}
-                      className="w-full relative group overflow-hidden rounded-2xl bg-gradient-to-r from-sky-500 to-blue-600 px-6 py-4 text-white font-semibold text-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
-                    >
-                      <div className="absolute inset-0 bg-white/20 group-hover:translate-x-full transition-transform duration-500 ease-out -skew-x-12 -ml-8 w-1/2"></div>
-                      <span className="flex items-center justify-center gap-2">
-                        {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : 'Deploy New Contract'}
-                      </span>
-                    </button>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
+                            Your Exact Age (Private)
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            value={age}
+                            onChange={(e) => setAge(Math.max(1, parseInt(e.target.value) || 0))}
+                            disabled={loading}
+                            className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-white text-base font-mono focus:outline-none focus:border-[#7c6cff] transition-colors"
+                          />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
+                            Required Threshold
+                          </label>
+                          <input
+                            type="number"
+                            min="1"
+                            value={threshold}
+                            onChange={(e) => setThreshold(Math.max(1, parseInt(e.target.value) || 0))}
+                            disabled={loading}
+                            className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-white text-base font-mono focus:outline-none focus:border-[#7c6cff] transition-colors"
+                          />
+                        </div>
+                      </div>
 
-                    <div className="relative flex items-center py-2">
-                      <div className="flex-grow border-t border-white/10"></div>
-                      <span className="flex-shrink-0 mx-4 text-slate-500 text-sm font-semibold uppercase tracking-wider">
-                        or join existing
-                      </span>
-                      <div className="flex-grow border-t border-white/10"></div>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <input
-                        type="text"
-                        placeholder="Paste contract address..."
-                        value={joinAddress}
-                        onChange={(e) => setJoinAddress(e.target.value)}
-                        disabled={loading}
-                        className="flex-1 bg-black/20 border border-white/10 rounded-2xl px-5 py-4 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all"
-                      />
                       <button
-                        onClick={handleJoin}
-                        disabled={loading || !joinAddress.trim()}
-                        className="sm:w-32 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 rounded-2xl px-6 py-4 font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        onClick={handleVerify}
+                        disabled={loading}
+                        className="w-full inline-flex items-center justify-center gap-2 font-semibold text-[15px] p-4 rounded-xl bg-gradient-to-r from-[#4dffb0] to-[#4fd8ff] text-[#08080f] shadow-[0_6px_24px_rgba(77,255,176,0.3)] hover:shadow-[0_10px_30px_rgba(77,255,176,0.45)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 transition-all cursor-pointer"
                       >
-                        Join
+                        {loading ? (
+                          <>
+                            <Loader2 className="w-5 h-5 animate-spin" /> Generating Proof...
+                          </>
+                        ) : (
+                          'Generate ZK Proof & Verify'
+                        )}
                       </button>
                     </div>
-                  </div>
+                  )}
                 </div>
-              ) : (
-                <div className="flex-1 space-y-8">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className="bg-emerald-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-lg shadow-lg shadow-emerald-500/30">
-                        2
+              </div>
+
+              {/* Right Status Panel */}
+              <div className="lg:col-span-5">
+                <div className="bg-[#12131f] border border-white/[0.08] rounded-2xl p-8 relative overflow-hidden shadow-2xl h-full flex flex-col items-center justify-center text-center">
+                  <span className="inline-block text-center text-[11.5px] uppercase tracking-wider text-[#5e6078] border border-white/[0.08] px-3 py-1 rounded-full mb-6">
+                    VERIFICATION STATUS
+                  </span>
+
+                  <div className="flex-1 flex flex-col justify-center items-center w-full my-auto">
+                    {loading ? (
+                      <div className="space-y-4">
+                        <div className="relative w-20 h-20 mx-auto">
+                          <div className="absolute inset-0 border-4 border-[#7c6cff]/20 rounded-full" />
+                          <div className="absolute inset-0 border-4 border-[#7c6cff] rounded-full border-t-transparent animate-spin" />
+                          <Lock className="w-7 h-7 text-[#7c6cff] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        </div>
+                        <p className="text-[#b18cff] font-medium text-sm animate-pulse">
+                          Computing Zero-Knowledge Proof...
+                        </p>
                       </div>
-                      <h2 className="text-2xl font-bold text-slate-100">Verify Age</h2>
-                    </div>
-                    <div className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-3 py-1.5 rounded-full text-sm font-medium flex items-center gap-1.5">
-                      <CheckCircle className="w-4 h-4" /> Connected
-                    </div>
-                  </div>
+                    ) : derivedState?.isEligible ? (
+                      <div className="space-y-4 w-full">
+                        <div className="w-24 h-24 mx-auto bg-[#4dffb0]/15 rounded-full flex items-center justify-center border-2 border-[#4dffb0]/40 shadow-[0_0_30px_rgba(77,255,176,0.25)]">
+                          <CheckCircle className="w-12 h-12 text-[#4dffb0]" />
+                        </div>
+                        <div>
+                          <h4 className="font-['Space_Grotesk',sans-serif] text-2xl font-bold text-[#4dffb0]">
+                            Eligible
+                          </h4>
+                          <p className="text-[#9496ab] text-sm mt-1">Proved age is ≥ {threshold}</p>
+                        </div>
 
-                  <div className="bg-black/20 border border-white/5 rounded-2xl p-4 flex items-center justify-between group">
-                    <div className="min-w-0 mr-4">
-                      <p className="text-slate-500 text-xs font-semibold uppercase tracking-wider mb-1">
-                        Active Contract
-                      </p>
-                      <p className="font-mono text-sm text-slate-300 truncate">{activeContractAddress}</p>
-                    </div>
-                    <button
-                      onClick={copyToClipboard}
-                      className="p-2 hover:bg-white/10 rounded-xl transition-colors text-slate-400 hover:text-white"
-                      title="Copy Address"
-                    >
-                      {copied ? <CheckCircle className="w-5 h-5 text-emerald-500" /> : <Copy className="w-5 h-5" />}
-                    </button>
+                        <div className="mt-6 bg-[#08080f] rounded-xl p-3.5 border border-white/[0.06] text-left">
+                          <p className="text-[#5e6078] text-[11px] font-bold uppercase tracking-wider">
+                            Recorded On-Chain
+                          </p>
+                          <p className="text-[#4dffb0] font-mono text-xs mt-0.5">
+                            {derivedState.timestamp
+                              ? new Date(Number(derivedState.timestamp)).toLocaleString()
+                              : 'Verified on Preprod'}
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="space-y-4 text-[#5e6078]">
+                        <div className="w-24 h-24 mx-auto bg-white/[0.02] border border-white/[0.08] rounded-full flex items-center justify-center">
+                          <svg viewBox="0 0 100 100" fill="none" className="w-14 h-14">
+                            <path
+                              d="M50 6 L88 20 V48 C88 72 71 88 50 96 C29 88 12 72 12 48 V20 Z"
+                              fill="rgba(124,108,255,0.06)"
+                              stroke="rgba(255,255,255,0.16)"
+                              strokeWidth="1.5"
+                            />
+                            <line
+                              x1="34"
+                              y1="62"
+                              x2="66"
+                              y2="36"
+                              stroke="#5e6078"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                            />
+                            <line
+                              x1="34"
+                              y1="36"
+                              x2="66"
+                              y2="62"
+                              stroke="#5e6078"
+                              strokeWidth="3"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <h4 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-[#f2f2f7]">
+                            Not Verified
+                          </h4>
+                          <p className="text-[#5e6078] text-xs mt-1">Connect and run verification to see status</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-slate-400 text-xs font-bold uppercase tracking-wider block">
-                        Your Exact Age (Private)
-                      </label>
-                      <input
-                        type="number"
-                        min="1"
-                        value={age}
-                        onChange={(e) => setAge(Math.max(1, parseInt(e.target.value) || 0))}
-                        disabled={loading}
-                        className="w-full bg-black/20 border border-white/10 rounded-2xl px-5 py-4 text-white text-lg focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all font-mono"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-slate-400 text-xs font-bold uppercase tracking-wider block">
-                        Required Threshold
-                      </label>
-                      <input
-                        type="number"
-                        min="1"
-                        value={threshold}
-                        onChange={(e) => setThreshold(Math.max(1, parseInt(e.target.value) || 0))}
-                        disabled={loading}
-                        className="w-full bg-black/20 border border-white/10 rounded-2xl px-5 py-4 text-white text-lg focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all font-mono"
-                      />
-                    </div>
-                  </div>
+        {/* ---------- PRIVACY MODEL ---------- */}
+        <section id="privacy" className="py-20 border-t border-white/[0.08] bg-[#08080f]/40">
+          <div className="wrap">
+            <div className="max-w-[640px] mb-12">
+              <h2 className="font-['Space_Grotesk',sans-serif] font-bold text-3xl sm:text-4xl tracking-tight text-white">
+                What actually leaves your device
+              </h2>
+              <p className="mt-3 text-[15.5px] text-[#9496ab] leading-relaxed">
+                Two ledgers, two purposes. Your real data stays local; the chain only ever sees the outcome.
+              </p>
+            </div>
 
-                  <button
-                    onClick={handleVerify}
-                    disabled={loading}
-                    className="w-full relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-4 text-white font-semibold text-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100 shadow-lg shadow-emerald-500/20"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      {loading ? <Loader2 className="w-6 h-6 animate-spin" /> : 'Generate ZK Proof & Verify'}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-[#12131f] border border-white/[0.08] border-t-2 border-t-[#7c6cff] rounded-2xl p-7">
+                <div className="flex items-center gap-2.5 font-['Space_Grotesk',sans-serif] font-bold text-[15px] text-[#b18cff] mb-4">
+                  <Shield className="w-5 h-5 text-[#7c6cff]" /> Private witness — local only
+                </div>
+                <ul className="space-y-3 text-sm text-[#9496ab]">
+                  <li className="flex gap-2.5 leading-relaxed">
+                    <span className="text-[#7c6cff]">•</span>
+                    <span>
+                      <strong className="text-white">Actual age</strong> — evaluated entirely on your device. Never
+                      transmitted to the ledger, a node, or any server.
                     </span>
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Result Card */}
-          <div className="lg:col-span-5">
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl h-full flex flex-col items-center justify-center text-center relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4 opacity-10">
-                <Shield className="w-48 h-48" />
+                  </li>
+                  <li className="flex gap-2.5 leading-relaxed pt-2 border-t border-white/[0.06]">
+                    <span className="text-[#7c6cff]">•</span>
+                    <span>
+                      <strong className="text-white">Private key</strong> — remains securely in your local wallet to
+                      sign the intent.
+                    </span>
+                  </li>
+                </ul>
               </div>
 
-              <h3 className="text-slate-400 text-sm font-bold uppercase tracking-[0.2em] mb-8 relative z-10">
-                Verification Status
-              </h3>
-
-              <div className="relative z-10 flex-1 flex flex-col justify-center items-center w-full">
-                {loading ? (
-                  <div className="space-y-6">
-                    <div className="relative w-24 h-24 mx-auto">
-                      <div className="absolute inset-0 border-4 border-sky-500/20 rounded-full"></div>
-                      <div className="absolute inset-0 border-4 border-sky-500 rounded-full border-t-transparent animate-spin"></div>
-                      <Lock className="w-8 h-8 text-sky-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-                    </div>
-                    <p className="text-sky-400 font-medium animate-pulse">Computing Zero-Knowledge Proof...</p>
-                  </div>
-                ) : derivedState?.isEligible ? (
-                  <div className="space-y-6 w-full">
-                    <div className="w-28 h-28 mx-auto bg-emerald-500/20 rounded-full flex items-center justify-center border-4 border-emerald-500/30">
-                      <CheckCircle className="w-14 h-14 text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)]" />
-                    </div>
-                    <div>
-                      <h4 className="text-3xl font-extrabold text-emerald-400 mb-2">Eligible</h4>
-                      <p className="text-slate-400">Proved age is ≥ {threshold}</p>
-                    </div>
-
-                    <div className="mt-8 bg-black/30 rounded-2xl p-4 border border-white/5 text-left">
-                      <p className="text-slate-500 text-xs font-bold uppercase mb-1">Recorded On-Chain</p>
-                      <p className="text-emerald-400 font-mono text-sm">
-                        {derivedState.timestamp
-                          ? new Date(Number(derivedState.timestamp)).toLocaleString()
-                          : 'Just now'}
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-6 text-slate-500">
-                    <div className="w-28 h-28 mx-auto bg-slate-800/50 rounded-full flex items-center justify-center border-4 border-slate-700/50">
-                      <XCircle className="w-14 h-14 text-slate-600" />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-bold text-slate-400">Not Verified</h4>
-                      <p className="text-slate-500 mt-2">Connect and run verification to see status</p>
-                    </div>
-                  </div>
-                )}
+              <div className="bg-[#12131f] border border-white/[0.08] border-t-2 border-t-[#4fd8ff] rounded-2xl p-7">
+                <div className="flex items-center gap-2.5 font-['Space_Grotesk',sans-serif] font-bold text-[15px] text-[#4fd8ff] mb-4">
+                  <Info className="w-5 h-5 text-[#4fd8ff]" /> Public ledger — on-chain
+                </div>
+                <ul className="space-y-3 text-sm text-[#9496ab]">
+                  <li className="flex gap-2.5 leading-relaxed">
+                    <span className="text-[#4fd8ff]">•</span>
+                    <span>
+                      <strong className="text-white">Eligibility result</strong> — only a boolean true is recorded,
+                      proving you met the threshold without leaking by how much.
+                    </span>
+                  </li>
+                  <li className="flex gap-2.5 leading-relaxed pt-2 border-t border-white/[0.06]">
+                    <span className="text-[#4fd8ff]">•</span>
+                    <span>
+                      <strong className="text-white">Wallet identity</strong> — the public key that performed the
+                      verification.
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
+        </section>
+      </main>
 
-          {/* Privacy Panel */}
-          <div className="lg:col-span-12 mt-4">
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-              <div className="flex items-center space-x-3 mb-8">
-                <Lock className="w-6 h-6 text-sky-400" />
-                <h3 className="text-xl font-bold text-white">Privacy Model Explained</h3>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-sky-500/5 border border-sky-500/10 rounded-2xl p-6 relative overflow-hidden group hover:bg-sky-500/10 transition-colors">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <Shield className="w-5 h-5 text-sky-400" />
-                    <h4 className="font-bold text-sky-400 tracking-wide">PRIVATE WITNESS (Local Only)</h4>
-                  </div>
-                  <ul className="space-y-3 text-slate-400 text-sm">
-                    <li className="flex items-start">
-                      <span className="text-sky-500 mr-2">•</span>
-                      <span>
-                        <strong>Actual Age:</strong> Evaluated entirely on your device. Never transmitted to the ledger,
-                        a node, or any server.
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-sky-500 mr-2">•</span>
-                      <span>
-                        <strong>Private Key:</strong> Remains securely in your local wallet to sign the intent.
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-6 relative overflow-hidden group hover:bg-emerald-500/10 transition-colors">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <Info className="w-5 h-5 text-emerald-400" />
-                    <h4 className="font-bold text-emerald-400 tracking-wide">PUBLIC LEDGER (On-Chain)</h4>
-                  </div>
-                  <ul className="space-y-3 text-slate-400 text-sm">
-                    <li className="flex items-start">
-                      <span className="text-emerald-500 mr-2">•</span>
-                      <span>
-                        <strong>Eligibility Result:</strong> Only a boolean <code>true</code> is recorded, proving you
-                        met the threshold without leaking by how much.
-                      </span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-emerald-500 mr-2">•</span>
-                      <span>
-                        <strong>Wallet Identity:</strong> Public key that performed the verification.
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+      {/* ---------- FOOTER ---------- */}
+      <footer className="border-t border-white/[0.08] py-10 bg-[#08080f]">
+        <div className="wrap flex flex-wrap items-center justify-between gap-4 text-[13.5px] text-[#5e6078]">
+          <span>© 2026 Nightproof. Built on Midnight Network.</span>
+          <div className="flex gap-6">
+            <a
+              href="https://github.com/shwetasharma44044-eng/Private-Age-"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#9496ab] transition-colors"
+            >
+              Docs
+            </a>
+            <a
+              href="https://github.com/shwetasharma44044-eng/Private-Age-"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-[#9496ab] transition-colors"
+            >
+              Contracts
+            </a>
+            <a href="#privacy" className="hover:text-[#9496ab] transition-colors">
+              Privacy policy
+            </a>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };
