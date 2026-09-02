@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { type MidnightProviders } from '@midnight-ntwrk/midnight-js-types';
-import { type FoundContract } from '@midnight-ntwrk/midnight-js-contracts';
-import type { AgeGatePrivateState } from '../../contract/src/index';
+import { type MidnightProviders } from "@midnight-ntwrk/midnight-js-types";
+import { type FoundContract } from "@midnight-ntwrk/midnight-js-contracts";
+import type { AgeGatePrivateState } from "../../contract/src/index";
 
-export const ageGatePrivateStateKey = 'ageGatePrivateState';
+export const ageGatePrivateStateKey = "ageGatePrivateState";
 export type PrivateStateId = typeof ageGatePrivateStateKey;
 
 export type PrivateStates = {
@@ -39,9 +39,16 @@ export interface AgeGateContract {
   initialState(context: any): any;
 }
 
-export type AgeGateCircuitKeys = Exclude<keyof AgeGateContract['impureCircuits'], number | symbol>;
+export type AgeGateCircuitKeys = Exclude<
+  keyof AgeGateContract["impureCircuits"],
+  number | symbol
+>;
 
-export type AgeGateProviders = MidnightProviders<AgeGateCircuitKeys, PrivateStateId, AgeGatePrivateState>;
+export type AgeGateProviders = MidnightProviders<
+  AgeGateCircuitKeys,
+  PrivateStateId,
+  AgeGatePrivateState
+>;
 
 export type DeployedAgeGateContract = FoundContract<AgeGateContract>;
 
