@@ -6,7 +6,7 @@ A production-grade decentralized application (Level 3) built on the Midnight Net
 
 ## 🌟 Hackathon Submission
 
-- **Live Website:** [View the Deployed Vercel App](https://private-age-gate-4hqvs59uf-shweta7.vercel.app/) 🌐
+- **Live Website:** [View the Deployed Vercel App](https://private-age-jet.vercel.app/) 🌐
 - **Demo Video:** [Watch the working demo here](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA) 🎥
 - **Proposal:** Please refer to the [PROPOSAL.md](./PROPOSAL.md) for the detailed problem statement, solution overview, and why Midnight Network's unique features make this possible.
 
@@ -79,12 +79,12 @@ npm run test:ui
 
 - **Environment:** Midnight Preprod
 - **Deployed Contract Address (Preprod):** `03a1f9e2b4d6c8a0f1e3d5b7a9c1e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6`
-- **Live Website:** [https://private-age-gate-4hqvs59uf-shweta7.vercel.app/](https://private-age-gate-4hqvs59uf-shweta7.vercel.app/)
+- **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
 
 ## 👩‍💻 Author & GitHub Details
 
 - **Author / Developer:** Shweta Sharma
 - **GitHub Profile:** [@shwetasharma44044-eng](https://github.com/shwetasharma44044-eng)
 - **GitHub Repository:** [Private-Age-](https://github.com/shwetasharma44044-eng/Private-Age-)
-- **Live Website:** [https://private-age-gate-4hqvs59uf-shweta7.vercel.app/](https://private-age-gate-4hqvs59uf-shweta7.vercel.app/)
+- **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
 
