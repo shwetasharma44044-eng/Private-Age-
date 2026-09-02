@@ -1,7 +1,6 @@
 import {
   CostModel,
   createConstructorContext,
-  QueryContext,
   sampleContractAddress,
 } from "@midnight-ntwrk/compact-runtime";
 
