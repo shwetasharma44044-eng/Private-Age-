@@ -16,6 +16,7 @@
     ]
   },
   "scripts": {
+    "build": "npm run build --prefix bboard-ui",
     "dev": "npm --prefix bboard-ui run dev",
     "test:ui": "npm --prefix bboard-ui run test",
     "test:contract": "npm --prefix contract run test -- --run",
