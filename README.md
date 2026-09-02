@@ -1,6 +1,6 @@
 # 🛡️ Private Age Gate
 
-[![CI Build](https://github.com/shwetasharma44044-eng/Private-Age-Gate/actions/workflows/ci.yml/badge.svg)](https://github.com/shwetasharma44044-eng/Private-Age-Gate/actions/workflows/ci.yml)
+[![CI Build](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml/badge.svg)](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml)
 
 A production-grade decentralized application (Level 3) built on the Midnight Network. The Private Age Gate allows users to cryptographically prove they meet a specific age threshold (e.g., ≥ 18) without ever revealing their actual age, date of birth, or identity.
 
@@ -36,8 +36,8 @@ The application leverages Midnight's Compact smart contracts to generate Zero-Kn
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/shwetasharma44044-eng/Private-Age-Gate.git
-   cd Private-Age-Gate
+   git clone https://github.com/shwetasharma44044-eng/Private-Age-.git
+   cd Private-Age-
    ```
 2. Install dependencies:
    ```bash
@@ -81,6 +81,10 @@ npm run test:ui
 - **Deployed Contract Address (Preprod):** `03a1f9e2b4d6c8a0f1e3d5b7a9c1e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6`
 - **Live Website:** [https://private-age-gate-4hqvs59uf-shweta7.vercel.app/](https://private-age-gate-4hqvs59uf-shweta7.vercel.app/)
 
-## 👩‍💻 Author
+## 👩‍💻 Author & GitHub Details
 
-- **GitHub:** [@shwetasharma44044-eng](https://github.com/shwetasharma44044-eng)
+- **Author / Developer:** Shweta Sharma
+- **GitHub Profile:** [@shwetasharma44044-eng](https://github.com/shwetasharma44044-eng)
+- **GitHub Repository:** [Private-Age-](https://github.com/shwetasharma44044-eng/Private-Age-)
+- **Live Website:** [https://private-age-gate-4hqvs59uf-shweta7.vercel.app/](https://private-age-gate-4hqvs59uf-shweta7.vercel.app/)
+
