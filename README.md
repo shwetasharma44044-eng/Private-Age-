@@ -2,12 +2,13 @@
 
 [![CI Build](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml/badge.svg)](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml)
 
-A production-grade decentralized application (Level 3) built on the Midnight Network. The Private Age Gate allows users to cryptographically prove they meet a specific age threshold (e.g., ≥ 18) without ever revealing their actual age, date of birth, or identity.
+A production-grade decentralized application (Level 4) built on the Midnight Network. The Private Age Gate allows users to cryptographically prove they meet a specific age threshold (e.g., ≥ 18) without ever revealing their actual age, date of birth, or identity.
 
 ## 🌟 Hackathon Submission
 
 - **Live Website:** [View the Deployed Vercel App](https://private-age-jet.vercel.app/) 🌐
 - **Demo Video:** [Watch the working demo here](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA) 🎥
+- **X / Twitter:** [Follow on X (@Shweta_Sharma_3)](https://x.com/Shweta_Sharma_3) 🐦
 - **Proposal:** Please refer to the [PROPOSAL.md](./PROPOSAL.md) for the detailed problem statement, solution overview, and why Midnight Network's unique features make this possible.
 
 ## 🏛️ Architecture & Privacy Model
@@ -81,10 +82,11 @@ npm run test:ui
 - **Deployed Contract Address (Preprod):** `03a1f9e2b4d6c8a0f1e3d5b7a9c1e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6`
 - **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
 
-## 👩‍💻 Author & GitHub Details
+## 👩‍💻 Author & Social Details
 
 - **Author / Developer:** Shweta Sharma
 - **GitHub Profile:** [@shwetasharma44044-eng](https://github.com/shwetasharma44044-eng)
+- **Twitter / X Profile:** [@Shweta_Sharma_3](https://x.com/Shweta_Sharma_3)
 - **GitHub Repository:** [Private-Age-](https://github.com/shwetasharma44044-eng/Private-Age-)
 - **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
 
