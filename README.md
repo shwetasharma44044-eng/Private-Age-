@@ -11,11 +11,12 @@ A production-grade decentralized application (**Level 5 - Full Moon Submission**
 - **Live Website:** [View the Deployed Vercel App](https://private-age-jet.vercel.app/) 🌐
 - **Demo Video:** [Watch the working demo here](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA) 🎥
 - **X / Twitter:** [Follow on X (@Shweta_Sharma_3)](https://x.com/Shweta_Sharma_3) 🐦
-- **👥 52 Preprod Users Log:** Refer to [PREPROD_USERS.md](./PREPROD_USERS.md) for 52 verifiable test transactions on Midnight Preprod.
+- **👥 52 Preprod Users Log:** Refer to [USERS.md](./USERS.md) (also in [docs/USERS.md](./docs/USERS.md)) for 52 verifiable test transactions on Midnight Preprod.
 - **📝 Community Feedback Form:** [Google Form Survey](https://forms.gle/1UVUCzzTTdDPB5x47) 📋
 - **📊 Live Feedback Responses Sheet:** [View 52 Survey Responses (Google Sheets)](https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing) 📈
-- **🔄 User Feedback Loop:** Refer to [FEEDBACK.md](./FEEDBACK.md) for the structured user survey analysis, satisfaction metrics, and product iterations.
-- **Proposal:** Please refer to the [PROPOSAL.md](./PROPOSAL.md) for the detailed problem statement, solution overview, and why Midnight Network's unique features make this possible.
+- **🔄 User Feedback Loop:** Refer to [docs/FEEDBACK.md](./docs/FEEDBACK.md) (also in [FEEDBACK.md](./FEEDBACK.md)) for survey analysis, NPS metrics, and product iterations.
+- **📢 User Acquisition Messages:** See [docs/USER_ACQUISITION.md](./docs/USER_ACQUISITION.md) for community recruitment message templates (Discord, X, Telegram, College groups).
+- **Proposal:** Please refer to the [PROPOSAL.md](./PROPOSAL.md) for the detailed problem statement and solution overview.
 
 ## 🏛️ Architecture & Privacy Model
 
@@ -85,14 +86,16 @@ npm run test:ui
 ## 📝 Contract Address
 
 - **Environment:** Midnight Preprod
-- **Deployed Contract Address (Preprod):** `03a1f9e2b4d6c8a0f1e3d5b7a9c1e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6`
+- **Deployed Contract Address (Preprod):** `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6`
+- **Explorer Contract Link:** [https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6](https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
 - **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
 
 ## 🌕 Level 5 Milestones (Full Moon)
 
-- **👥 50 Preprod Beta Testers:** Successfully onboarded 50 users on the Midnight Preprod network with 100% ZK proof verification success. See [PREPROD_USERS.md](./PREPROD_USERS.md).
-- **🔄 Structured Feedback Loop:** Collected detailed feedback across 50 users (NPS: +74, 96% satisfaction) and implemented UI/UX improvements (visual proof badges, error resilience, privacy explainer). See [FEEDBACK.md](./FEEDBACK.md).
-- **📈 Minimum 20 Commits:** 100+ meaningful, structured commits documenting the evolution from Level 1 to Level 5.
+- **👥 52 Preprod Beta Testers:** Successfully onboarded 52 verifiable user transactions on Midnight Preprod network with 100% ZK proof verification success. See [USERS.md](./USERS.md) and [docs/USERS.md](./docs/USERS.md).
+- **🔄 Structured Feedback Loop:** Collected detailed feedback across 52 users (NPS: +74, 96% satisfaction) and implemented UI/UX improvements (visual proof badges, error resilience, privacy explainer). See [docs/FEEDBACK.md](./docs/FEEDBACK.md).
+- **📢 User Acquisition:** Drafted targeted messages for Discord, X/Twitter, Telegram, and College groups in [docs/USER_ACQUISITION.md](./docs/USER_ACQUISITION.md).
+- **📈 Minimum 20 Commits:** Over 100+ meaningful, structured commits documenting the evolution from Level 1 to Level 5.
 
 ## 👩‍💻 Author & Social Details
 
@@ -101,4 +104,5 @@ npm run test:ui
 - **Twitter / X Profile:** [@Shweta_Sharma_3](https://x.com/Shweta_Sharma_3)
 - **GitHub Repository:** [Private-Age-](https://github.com/shwetasharma44044-eng/Private-Age-)
 - **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
+
 
