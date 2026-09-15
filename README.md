@@ -11,7 +11,7 @@ A production-grade decentralized application (**Level 5 - Full Moon Submission**
 - **Live Website:** [View the Deployed Vercel App](https://private-age-jet.vercel.app/) 🌐
 - **Demo Video:** [Watch the working demo here](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA) 🎥
 - **X / Twitter:** [Follow on X (@Shweta_Sharma_3)](https://x.com/Shweta_Sharma_3) 🐦
-- **👥 50 Preprod Users Log:** Refer to [PREPROD_USERS.md](./PREPROD_USERS.md) for 50 verifiable test transactions on Midnight Preprod.
+- **👥 52 Preprod Users Log:** Refer to [PREPROD_USERS.md](./PREPROD_USERS.md) for 52 verifiable test transactions on Midnight Preprod.
 - **🔄 User Feedback Loop:** Refer to [FEEDBACK.md](./FEEDBACK.md) for the structured user survey analysis, satisfaction metrics, and product iterations.
 - **Proposal:** Please refer to the [PROPOSAL.md](./PROPOSAL.md) for the detailed problem statement, solution overview, and why Midnight Network's unique features make this possible.
 

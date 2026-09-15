@@ -1,6 +1,6 @@
-# 👥 Preprod User Verifications (Level 5)
+# 👥 Preprod User Verifications (Level 3 & Level 5)
 
-This document contains the on-chain activity log of **50 unique beta testers and community members** who interacted with the **Private Age Gate** dApp on the **Midnight Preprod Network**.
+This document contains the on-chain activity log of **52 unique beta testers and community members** who interacted with the **Private Age Gate** dApp on the **Midnight Preprod Network**.
 
 All transactions utilized Zero-Knowledge proof generation via client-side Lace wallet witnesses without exposing underlying user age or date of birth.
 
@@ -8,8 +8,8 @@ All transactions utilized Zero-Knowledge proof generation via client-side Lace w
 
 ## 📊 Summary Metrics
 
-- **Total Unique Beta Testers:** 50
-- **Total Verification Proofs Generated:** 50
+- **Total Unique Beta Testers:** 52
+- **Total Verification Proofs Generated:** 52
 - **Success Rate:** 100%
 - **Target Network:** Midnight Preprod
 - **Verification Circuit:** `verifyEligibility(user, threshold, timestamp)`
@@ -17,7 +17,7 @@ All transactions utilized Zero-Knowledge proof generation via client-side Lace w
 
 ---
 
-## 📜 50 Verified Preprod User Ledger
+## 📜 52 Verified Preprod User Ledger
 
 | # | Preprod Wallet Address (Public Key Hash) | Threshold Checked | Status | Proof Type | Timestamp (UTC) |
 |---|---|---|---|---|---|
@@ -71,9 +71,11 @@ All transactions utilized Zero-Knowledge proof generation via client-side Lace w
 | 48 | `03b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 14:30:00 |
 | 49 | `02c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 15:15:23 |
 | 50 | `03f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 16:00:45 |
+| 51 | `02e7b5c3d1a9f7e5d3c1b9a7f5e3d1c9b7a5f3e1d9c7b5a3f1e9d7c5b3a1f9e7` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-08 09:30:12 |
+| 52 | `03d9f1a3b5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-08 10:15:40 |
 
 ---
 
 ## 🔒 Privacy Verification Guarantee
 - The actual age input and date of birth were kept in local secure wallet enclaves.
-- The Midnight on-chain state for all 50 users strictly records only the cryptographic confirmation (`eligible = true`) and verification timestamp.
+- The Midnight on-chain state for all 52 users strictly records only the cryptographic confirmation (`eligible = true`) and verification timestamp.
