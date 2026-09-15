@@ -6,6 +6,8 @@ A production-grade decentralized application (**Level 5 - Full Moon Submission**
 
 ## 🌟 Hackathon Submission (Level 5)
 
+- **On-Chain Preprod Contract Address:** `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6` 🔗
+- **Midnight Explorer:** [View Verified On-Chain Contract](https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6) 🔍
 - **Live Website:** [View the Deployed Vercel App](https://private-age-jet.vercel.app/) 🌐
 - **Demo Video:** [Watch the working demo here](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA) 🎥
 - **X / Twitter:** [Follow on X (@Shweta_Sharma_3)](https://x.com/Shweta_Sharma_3) 🐦
