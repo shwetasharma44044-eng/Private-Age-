@@ -8,7 +8,7 @@ This document details the **feedback collection, analysis, and iterative improve
 
 To evaluate user experience, cryptographic reliability, and UI clarity, feedback was gathered through:
 1. **Interactive Community Testing Sessions:** Live testing on Midnight Preprod with community builders and Discord testers.
-2. **Structured Google / Community Survey:** Focused on ease of onboarding, wallet interaction with Lace, proof generation speed, and privacy confidence.
+2. **Structured Google / Community Survey ([Google Form Link](https://forms.gle/1UVUCzzTTdDPB5x47)):** Focused on ease of onboarding, wallet interaction with Lace, proof generation speed, and privacy confidence.
 3. **Bug Tracking & Issue Reporting:** Direct user observation during wallet connection and transaction signing.
 
 ---
