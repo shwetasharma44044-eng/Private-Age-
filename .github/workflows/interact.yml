@@ -1,0 +1,65 @@
+name: Batch User Verifications on Preprod
+on:
+  workflow_dispatch:
+
+jobs:
+  interact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          cd preprod-deployment
+          npm install
+          npm install --no-save tsx
+          node infra/scripts/patch-wallet-sdk.mjs
+
+      - name: Copy Contract
+        run: |
+          cp contract/src/age_gate.compact preprod-deployment/contracts/src/bboard.compact
+
+      - name: Compile Contract
+        run: |
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/midnightntwrk/compact/releases/latest/download/compact-installer.sh | sh
+          export PATH="$HOME/.local/bin:$PATH"
+          compact update 0.31.1 || compact update 0.31.0
+          cd preprod-deployment/contracts
+          compact compile src/bboard.compact ./src/managed/bboard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build Contract Bindings
+        run: |
+          cd preprod-deployment/contracts
+          npm run build
+          
+      - name: Increase swap space
+        run: |
+          sudo swapoff -a || true
+          sudo rm -f /swapfile /swapfile_extra || true
+          sudo fallocate -l 10G /swapfile_extra || sudo dd if=/dev/zero of=/swapfile_extra bs=1M count=10240
+          sudo chmod 600 /swapfile_extra
+          sudo mkswap /swapfile_extra
+          sudo swapon /swapfile_extra
+          free -h
+
+      - name: Execute 52 User Verifications on Preprod
+        run: |
+          cd preprod-deployment/cli
+          npx tsx src/launcher/execute-interactions.ts
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192 --expose-gc"
+          WALLET_SEED: ${{ secrets.WALLET_SEED }}
+          CONTRACT_ADDRESS: "79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6"
+
+      - name: Commit Updated PREPROD_USERS.md
+        run: |
+          git config user.name "shwetasharma44044-eng"
+          git config user.email "shwetasharma44044@gmail.com"
+          git add PREPROD_USERS.md
+          git commit -m "docs: record 52 on-chain user verification transactions on Preprod" || true
+          git push origin main || true
