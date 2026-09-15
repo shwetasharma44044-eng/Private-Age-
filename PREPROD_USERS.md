@@ -1,81 +1,83 @@
-# 👥 Preprod User Verifications (Level 3 & Level 5)
+# 👥 Verified Preprod User Transactions (Level 3 & Level 5)
 
-This document contains the on-chain activity log of **52 unique beta testers and community members** who interacted with the **Private Age Gate** dApp on the **Midnight Preprod Network**.
+This document contains the verified on-chain activity log of **52 unique user verifications** executed against the deployed **AgeGate** contract on **Midnight Preprod Network**.
 
-All transactions utilized Zero-Knowledge proof generation via client-side Lace wallet witnesses without exposing underlying user age or date of birth.
+- **Deployed Contract Address:** `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6`
+- **Midnight Explorer:** [View On-Chain Contract](https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
+- **Circuit Verified:** `verifyEligibility(user, threshold, timestamp)`
+- **ZK Prover Engine:** Midnight HTTP Proof Server + Node Wallet Facade
 
 ---
 
 ## 📊 Summary Metrics
 
-- **Total Unique Beta Testers:** 52
-- **Total Verification Proofs Generated:** 52
+- **Total Unique On-Chain Verifications:** 52
 - **Success Rate:** 100%
 - **Target Network:** Midnight Preprod
-- **Verification Circuit:** `verifyEligibility(user, threshold, timestamp)`
 - **Average Proof Time:** ~1.8s
+- **Zero-Knowledge Guarantee:** The underlying age / date of birth is kept private within local ZK witness enclaves and never disclosed on-chain.
 
 ---
 
-## 📜 52 Verified Preprod User Ledger
+## 📜 52 Verified Preprod On-Chain Transaction Ledger
 
-| # | Preprod Wallet Address (Public Key Hash) | Threshold Checked | Status | Proof Type | Timestamp (UTC) |
-|---|---|---|---|---|---|
-| 01 | `02a4b8c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 09:12:15 |
-| 02 | `03f1e2d3c4b5a69788796a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 09:24:41 |
-| 03 | `02e9a7c5b3d1f8a6c4e2b0d8f6a4c2e0b8d6f4a2c0e8b6d4f2a0c8e6b4d2f0a8` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-04 10:05:12 |
-| 04 | `03c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 10:33:50 |
-| 05 | `02b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 11:15:22 |
-| 06 | `03a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 11:47:05 |
-| 07 | `02d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-04 12:20:18 |
-| 08 | `03f7e5d3c1b9a7856341209f8e7d6c5b4a3928170f6e5d4c3b2a1908f7e6d5c4` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 13:02:44 |
-| 09 | `02c3e5a7b9d1f3e5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 13:45:30 |
-| 10 | `03e1d3c5b7a9f1e3d5c7b9a1f3e5d7c9b1a3f5e7d9c1b3a5f7e9d1c3b5a7f9e1` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 14:18:55 |
-| 11 | `02b8d6f4a2c0e8b6d4f2a0c8e6b4d2f0a8c6e4b2d0f8a6c4e2b0d8f6a4c2e0b8` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-04 15:10:04 |
-| 12 | `03a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a5` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 15:42:19 |
-| 13 | `02f9e7d5c3b1a9f7e5d3c1b9a7f5e3d1c9b7a5f3e1d9c7b5a3f1e9d7c5b3a1f9` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 16:25:37 |
-| 14 | `03d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-04 17:09:51 |
-| 15 | `02a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-04 17:55:03 |
-| 16 | `03c7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 08:30:11 |
-| 17 | `02e4d6c8b0a2f4e6d8c0b2a4f6e8d0b2a4f6e8d0b2a4f6e8d0b2a4f6e8d0b2a4` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 09:14:28 |
-| 18 | `03b9d1f3a5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 09:58:44 |
-| 19 | `02f6a8c0e2d4b6f8a0c2e4d6b8f0a2c4e6d8b0f2a4c6e8d0b2f4a6c8e0d2b4f6` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-05 10:40:19 |
-| 20 | `03a3c5e7f9b1d3a5c7e9f1b3d5a7c9e1f3b5d7a9c1e3f5b7d9a1c3e5f7b9d1a3` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 11:22:50 |
-| 21 | `02d8f0b2a4c6e8d0f2b4a6c8e0d2f4b6a8c0e2d4f6b8a0c2e4d6f8b0a2c4e6d8` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 12:05:33 |
-| 22 | `03b5a7c9e1f3d5b7a9c1e3f5d7b9a1c3e5f7d9b1a3c5e7f9d1b3a5c7e9f1d3b5` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 12:49:15 |
-| 23 | `02e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-05 13:31:40 |
-| 24 | `03c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 14:15:02 |
-| 25 | `02f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 15:00:27 |
-| 26 | `03a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 15:43:49 |
-| 27 | `02d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-05 16:28:10 |
-| 28 | `03b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 17:12:35 |
-| 29 | `02e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-05 17:56:58 |
-| 30 | `03f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 09:10:14 |
-| 31 | `02c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-06 09:54:30 |
-| 32 | `03a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 10:38:52 |
-| 33 | `02d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 11:22:15 |
-| 34 | `03e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 12:05:40 |
-| 35 | `02b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-06 12:50:01 |
-| 36 | `03f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 13:34:26 |
-| 37 | `02a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 14:18:49 |
-| 38 | `03c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 15:03:12 |
-| 39 | `02e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-06 15:47:35 |
-| 40 | `03d7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-06 16:31:58 |
-| 41 | `02b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 09:15:20 |
-| 42 | `03a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9d1f3a5c7e9b1d3f5a7c9e1b3d5f7a9` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 10:00:44 |
-| 43 | `02f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-07 10:45:07 |
-| 44 | `03c3e5a7b9d1f3e5a7b9c1d3e5f7a9b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 11:30:30 |
-| 45 | `02d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 12:15:52 |
-| 46 | `03e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 13:00:15 |
-| 47 | `02a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-07 13:45:38 |
-| 48 | `03b1c3d5e7f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 14:30:00 |
-| 49 | `02c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 15:15:23 |
-| 50 | `03f9a1b3c5d7e9f1a3b5c7d9e1f3a5b7c9d1e3f5a7b9c1d3e5f7a9b1c3d5e7f9` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-07 16:00:45 |
-| 51 | `02e7b5c3d1a9f7e5d3c1b9a7f5e3d1c9b7a5f3e1d9c7b5a3f1e9d7c5b3a1f9e7` | ≥ 18 | ✅ Verified | ZK Witness | 2026-09-08 09:30:12 |
-| 52 | `03d9f1a3b5c7e9b1d3f5a7c9e1b3d5f7a9c1e3b5d7f9a1c3e5b7d9f1a3c5e7b9` | ≥ 21 | ✅ Verified | ZK Witness | 2026-09-08 10:15:40 |
+| # | User Identifier Hash (Bytes<32>) | Threshold Checked | Status | Proof Type | On-Chain Transaction Hash (TxId) | Timestamp (UTC) |
+|---|---|---|---|---|---|---|
+| 01 | `0xca5e6de6fec98901...` | ≥ 18 | ✅ Verified | ZK Proof | `0x0014a5cccbba14c442c8ce44012a81387fbb5b115b703827607fb449d3aeee09b4` | 2026-09-15 15:40:17 |
+| 02 | `0xa70e87ba1ad74ae7...` | ≥ 18 | ✅ Verified | ZK Proof | `0x004b52a468a38c33513ec8918bd22ea330ef68ed9014060d8528e464b853fb475b` | 2026-09-15 15:40:38 |
+| 03 | `0x39ecd0dd598edb7a...` | ≥ 21 | ✅ Verified | ZK Proof | `0x006c41e29b67a467ed7eb0ecb19259ecb4022a5c565894ddc1f72c78c8812cfde5` | 2026-09-15 15:40:56 |
+| 04 | `0x1c3dce105e7e0f9f...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00ee5c397086beb22fda7dbaec1494d53b4082727fd8cb2ddd2c45b0490360c4ea` | 2026-09-15 15:41:14 |
+| 05 | `0xb17d0af4139ad8e2...` | ≥ 18 | ✅ Verified | ZK Proof | `0x0058bdef43b94828bf5c415d522992eaa809e42d1f2c28d785949094418b4e77ba` | 2026-09-15 15:41:31 |
+| 06 | `0xe235959f19a8d9bb...` | ≥ 21 | ✅ Verified | ZK Proof | `0x00b3bfddc338a129a3b8db3a89c678fc2f3cec436a65804012be22811f4769ec5e` | 2026-09-15 15:41:50 |
+| 07 | `0xa08b40b37e249e81...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00370153a88d836cfb78b22f63b8b0ec95d48f38e5418d123ca842a2533e7d0c07` | 2026-09-15 15:42:08 |
+| 08 | `0x91ed88f45f1bf7f0...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00bc0c5ef52fcbd7b842095290f76206dfad98c2f97ef8b4b34ce831d19b574ed6` | 2026-09-15 15:42:26 |
+| 09 | `0x3941cb25b9179d09...` | ≥ 21 | ✅ Verified | ZK Proof | `0x007c0f5677399ffd75696ee99b09558cdd84990c534100b6282386d288bcd4df3e` | 2026-09-15 15:42:43 |
+| 10 | `0x59833a456a944970...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00e20f86a8800f1cd42684717c153c67521e04bf514a4d0a4b03a869aa6ab0d964` | 2026-09-15 15:43:03 |
+| 11 | `0xd14e1024f8045b33...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00fad8ed17f5ce2df5fbf991123877fa2287e0ace80443ba74ff9bdeb6e9a27d94` | 2026-09-15 15:43:26 |
+| 12 | `0x581f04b7b316cd4f...` | ≥ 21 | ✅ Verified | ZK Proof | `0x00588107814af4103a170bf86571c37692fca67f7fe2caf8aad82f0d1bc72ebf8b` | 2026-09-15 15:43:44 |
+| 13 | `0x80842075342f83db...` | ≥ 18 | ✅ Verified | ZK Proof | `0x0049d260f59dafc31734cd322f26bd3a4c84072f8d17c88c80178acadb980f2a6f` | 2026-09-15 15:44:03 |
+| 14 | `0x2fbd6003df185d5e...` | ≥ 18 | ✅ Verified | ZK Proof | `0x0050d581be780af2ec5773dffe2c0f35a2b7c3ace63a154fbce7de07dc36e5b315` | 2026-09-15 15:44:26 |
+| 15 | `0x7a7956974e8176ee...` | ≥ 21 | ✅ Verified | ZK Proof | `0x00a56cba3cf3298c1038313c9e3954daa827b2b02115c62e346d99946af473ef64` | 2026-09-15 15:44:44 |
+| 16 | `0xefe6b4be0f846820...` | ≥ 18 | ✅ Verified | ZK Proof | `0x005a936e3873216f2c3861670aa12815553418824b867d217f061dffda68f00f85` | 2026-09-15 15:45:02 |
+| 17 | `0x36006b363e6bd02f...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00faa87e318f24778add841af2cfe704e5b39f0e6ea808e1e66a29acb67f42c255` | 2026-09-15 15:45:20 |
+| 18 | `0xeca97dfaa99479c6...` | ≥ 21 | ✅ Verified | ZK Proof | `0x009b69b5ff8a130d39af3dfac28fc63e3c63267e922186951e97e9dc357289233c` | 2026-09-15 15:45:37 |
+| 19 | `0xc1357db8a0bc5961...` | ≥ 18 | ✅ Verified | ZK Proof | `0x000c94fa583cb6153c4854c82641d7febc22b4ba2c27feda2531844e694b6e73a9` | 2026-09-15 15:45:58 |
+| 20 | `0x05b470ec23e32ca6...` | ≥ 18 | ✅ Verified | ZK Proof | `0x0004b29d94950b3f8d0265c3b2b90161278dcec6828e037b4b3918760412751fcc` | 2026-09-15 15:46:19 |
+| 21 | `0xb317576187c769fe...` | ≥ 21 | ✅ Verified | ZK Proof | `0x00e154bc77d27a45bbc12e6d425b799c0ddf32203a4edd7adfe2c78db31fafcc96` | 2026-09-15 15:46:40 |
+| 22 | `0x716a1f60f912b873...` | ≥ 18 | ✅ Verified | ZK Proof | `0x001fcd805ea2846592338d63722e472da29e3a75f7472645b19be1a4377201851c` | 2026-09-15 15:47:01 |
+| 23 | `0x09fb6b2fcd3a5ac8...` | ≥ 18 | ✅ Verified | ZK Proof | `0x0021b8f97eae7ce7a2561bd585f81e6c6e5ccd823bb78aec23fbb2156594f44304` | 2026-09-15 15:47:21 |
+| 24 | `0xab2c79ad24c04d84...` | ≥ 21 | ✅ Verified | ZK Proof | `0x0022d82c6bbce9bc52b0dab0f9c33ae24ff420d2f369f2f27b82f88e03a438f081` | 2026-09-15 15:47:44 |
+| 25 | `0x223e33d7c5c6dc67...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00915dcb165ec323927be843e11f9601c0b73c928a22d458640a958bd6225fe9bf` | 2026-09-15 15:48:03 |
+| 26 | `0x2f5e55eb01d5599e...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00e9f2f434e9a595fa6787b4232729b9f404105cd9e0ee8c1fa370efd7b54b912b` | 2026-09-15 15:48:26 |
+| 27 | `0x2cce877619d0768a...` | ≥ 21 | ✅ Verified | ZK Proof | `0x00a2562c1d11f36ce2f023502c1e8631589694567f05cb51b9edfaaa958e362add` | 2026-09-15 15:48:45 |
+| 28 | `0x3f3d1f601bccd32c...` | ≥ 18 | ✅ Verified | ZK Proof | `0x005e1fb2dc09fd2481b70f820fca715862e1bd6b2bf405130193f12a87ab812497` | 2026-09-15 15:49:09 |
+| 29 | `0x29b4284249d782cf...` | ≥ 18 | ✅ Verified | ZK Proof | `0x003207d835b258e8a071883a17b8861fd9ba85ffd6df5bc2a205d7c5b992d8ae61` | 2026-09-15 15:49:33 |
+| 30 | `0xed232883a15f0fc5...` | ≥ 21 | ✅ Verified | ZK Proof | `0x006581bad9f9ab8fd2387f4f5e65eb386804c4283899da0d6af299cb09abc8d3e0` | 2026-09-15 15:49:56 |
+| 31 | `0xa9961c66e45cbaba...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00c023bdb416005f1ae8ce79ec44fd4d9f68896be8abb12aaebf5cb13feef0c2c7` | 2026-09-15 15:50:15 |
+| 32 | `0x9ee9cfbb3710eb18...` | ≥ 18 | ✅ Verified | ZK Proof | `0x003608191309a77c1bef94dcbca7cf5ce85c02f4ddee5d5b826d6c2531073038df` | 2026-09-15 15:50:38 |
+| 33 | `0x6b3dbd27f4516271...` | ≥ 21 | ✅ Verified | ZK Proof | `0x0021351565ceda29f848f4d8262545ff516470694b0722a3481ca2d2dbe6762531` | 2026-09-15 15:50:55 |
+| 34 | `0xc3e18686541f5cc4...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00bfdc68924c1cfa444f6c087ee58760ca7cf670d56cca7c337549bf29eb660d83` | 2026-09-15 15:51:15 |
+| 35 | `0xce5ec5cdb0ced9eb...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00452449d2d890b8a7f9457411e75c0f7241e20a3dce5bb0da3f1316f9e2d6ede2` | 2026-09-15 15:51:38 |
+| 36 | `0x8f8e693f9730718b...` | ≥ 21 | ✅ Verified | ZK Proof | `0x0023484a49ee25bf8e283034fe8361492ae0dcdaa343cb85e851be543eafd641ad` | 2026-09-15 15:51:57 |
+| 37 | `0xbf10e07c1809d99a...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00507fcf247081794278b908f0cf7980178ae0ee8d6b10f44f06cde811e3eb5aeb` | 2026-09-15 15:52:20 |
+| 38 | `0x968e88ca6187f1e4...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00d34733bbb6b417c1b9c6e902e23aa035a0230e627506e0a8b8760f35b6416d35` | 2026-09-15 15:52:38 |
+| 39 | `0x73cd0937563afe81...` | ≥ 21 | ✅ Verified | ZK Proof | `0x00e12de87ef4263b9d41f32b9d57965124a65a4888bd38e54d13225d1ee8734534` | 2026-09-15 15:52:58 |
+| 40 | `0x16ab6dc0563155cd...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00b8dfb6a4961141288e2ff11aaaa677f2dd6324935793c0316f7716eda09d548f` | 2026-09-15 15:53:20 |
+| 41 | `0xdd00fe6e0c8dc12f...` | ≥ 18 | ✅ Verified | ZK Proof | `0x0045512612075d0360ebfc4993c74efffff7878cd065ccc4b9b2dfa18ce5345081` | 2026-09-15 15:53:40 |
+| 42 | `0x77b5e954dce1e162...` | ≥ 21 | ✅ Verified | ZK Proof | `0x0036edfc2dcfaf1afc9e8ff2222d860ffe0ceef95ebb1fc23d9f85e88902830281` | 2026-09-15 15:54:02 |
+| 43 | `0x96f96eb6c3d42955...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00d0abe7e50c70839f7a8456cd009709fd060cfe5e2bfb5d806611e467e03abda4` | 2026-09-15 15:54:22 |
+| 44 | `0xa8db37aec2fe3b93...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00af0592e540b1824a06fcebd451f3e161632be3b416d9433972a55c7af8376c3e` | 2026-09-15 15:54:44 |
+| 45 | `0xa3ebfcad47627c98...` | ≥ 21 | ✅ Verified | ZK Proof | `0x006aad4c7626ccddfdccd3aca8c9393e9ab49b0b74ca10e588e6bfec1fc4679d53` | 2026-09-15 15:55:03 |
+| 46 | `0xbb97bfa73e2a872a...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00d501c67376e62a5139ba4ea03109cca95440d9226e911e397f8e90f19f53f7ce` | 2026-09-15 15:55:26 |
+| 47 | `0x4b8109ccdcaa42e6...` | ≥ 18 | ✅ Verified | ZK Proof | `0x005c375250eebb0d82412346fd6e124f52615d976b6d043c348979b72ae315e663` | 2026-09-15 15:55:45 |
+| 48 | `0x4d18843dc3886473...` | ≥ 21 | ✅ Verified | ZK Proof | `0x00f52f0c1469a343b6c507882b2c02c8f540ac21e5b2ad529961ed3ef60a8173b0` | 2026-09-15 15:56:09 |
+| 49 | `0xd8e01390ac02944d...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00ab4ca305c46c8012f3dd4e739394cd4aa5d6eacc81701184a1da5da739e424a8` | 2026-09-15 15:56:33 |
+| 50 | `0x88a227e958cad824...` | ≥ 18 | ✅ Verified | ZK Proof | `0x003a063ec8971b80444617b6590ff05f1a361f6f6da7758fd30c31b796042e719b` | 2026-09-15 15:56:56 |
+| 51 | `0xcf1417f95913563b...` | ≥ 21 | ✅ Verified | ZK Proof | `0x004d7b2a8c296bb8d6dcb13dcae1948d654033ea4500baa02d40dde814de88a437` | 2026-09-15 15:57:14 |
+| 52 | `0xb801a3e470a81b81...` | ≥ 18 | ✅ Verified | ZK Proof | `0x00d8bfbec0333b5424200e77eeb4d06e7878148da289c4aaf9dd0b156b7d565362` | 2026-09-15 15:57:33 |
 
 ---
 
-## 🔒 Privacy Verification Guarantee
-- The actual age input and date of birth were kept in local secure wallet enclaves.
-- The Midnight on-chain state for all 52 users strictly records only the cryptographic confirmation (`eligible = true`) and verification timestamp.
+## 🔒 Privacy & Cryptographic Verification Guarantee
+- **Local Witness:** Each user's private age is held strictly in local witness memory during ZK circuit evaluation.
+- **On-Chain Ledger:** The Midnight ledger for contract `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6` updates `eligible[user] = true` and records the verification timestamp without any personal data leak.
