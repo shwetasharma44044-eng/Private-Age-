@@ -1,0 +1,21 @@
+pragma language_version >= 0.20;
+
+import CompactStandardLibrary;
+
+export ledger eligible: Map<Bytes<32>, Boolean>;
+export ledger verification_timestamp: Map<Bytes<32>, Uint<64>>;
+
+constructor() {
+}
+
+witness localAge(): Uint<32>;
+
+export circuit verifyEligibility(user: Bytes<32>, threshold: Uint<32>, timestamp: Uint<64>): Boolean {
+  const age = localAge();
+  assert(age >= threshold, "User age is below the required threshold");
+  
+  eligible.insert(disclose(user), disclose(true));
+  verification_timestamp.insert(disclose(user), disclose(timestamp));
+  
+  return true;
+}
