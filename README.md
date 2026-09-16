@@ -10,7 +10,7 @@ A production-grade decentralized application (**Level 5 - Full Moon Submission**
 - **Midnight Explorer:** [View Verified On-Chain Contract](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)🔍
 - **Live Website:** [View the Deployed Vercel App](https://private-age-jet.vercel.app/) 🌐
 - **Demo Video:** [Watch the working demo here](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA) 🎥
-- **X / Twitter:** [Follow on X (@Shweta_Sharma_3)](https://x.com/Shweta_Sharma_3) 🐦
+- **X / Twitter:** [Follow on X (@PrivateAgeweb3)](https://x.com/PrivateAgeweb3) 🐦
 - **👥 52 Preprod Users Log:** Refer to [USERS.md](./USERS.md) (also in [docs/USERS.md](./docs/USERS.md)) for 52 verifiable test transactions on Midnight Preprod.
 - **📝 Community Feedback Form:** [Google Form Survey](https://forms.gle/1UVUCzzTTdDPB5x47) 📋
 - **📊 Live Feedback Responses Sheet:** [View 52 Survey Responses (Google Sheets)](https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing) 📈
@@ -101,7 +101,7 @@ npm run test:ui
 
 - **Author / Developer:** Shweta Sharma
 - **GitHub Profile:** [@shwetasharma44044-eng](https://github.com/shwetasharma44044-eng)
-- **Twitter / X Profile:** [@Shweta_Sharma_3](https://x.com/Shweta_Sharma_3)
+- **Twitter / X Profile:** [https://x.com/Shweta_Sharma_3](https://x.com/PrivateAgeweb3)
 - **GitHub Repository:** [Private-Age-](https://github.com/shwetasharma44044-eng/Private-Age-)
 - **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
 
