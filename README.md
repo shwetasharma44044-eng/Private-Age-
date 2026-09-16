@@ -87,7 +87,7 @@ npm run test:ui
 
 - **Environment:** Midnight Preprod
 - **Deployed Contract Address (Preprod):** `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6`
-- **Explorer Contract Link:** [https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6](https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
+- **Explorer Contract Link:** [https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
 - **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
 
 ## 🌕 Level 5 Milestones (Full Moon)
