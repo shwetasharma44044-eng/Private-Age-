@@ -18,21 +18,35 @@ A production-grade decentralized application (**Level 5 - Full Moon Submission**
 - **📢 User Acquisition Messages:** See [docs/USER_ACQUISITION.md](./docs/USER_ACQUISITION.md) for community recruitment message templates (Discord, X, Telegram, College groups).
 - **Proposal:** Please refer to the [PROPOSAL.md](./PROPOSAL.md) for the detailed problem statement and solution overview.
 
-## 🏛️ Architecture & Privacy Model
+## 🏛️ Level 5 Contract Architecture & Privacy Model
 
-The application leverages Midnight's Compact smart contracts to generate Zero-Knowledge proofs locally.
+The application leverages Midnight's Compact smart contracts with a multi-circuit ZK Identity & Credential architecture:
 
 | Data | Storage | Visibility |
 |------|---------|------------|
-| **User's Actual Age** | Local Wallet (Witness) | 🔒 **Private** (Never leaves the device) |
-| **Eligibility Result** (`true/false`) | Midnight Public Ledger | 🌍 **Public** (Verifiable on-chain) |
-| **Verification Timestamp** | Midnight Public Ledger | 🌍 **Public** |
-| **Wallet Public Key** | Midnight Public Ledger | 🌍 **Public** |
+| **User's Actual Age / DOB (Year, Month, Day)** | Local Wallet Enclave (Witness) | 🔒 **Private** (Never leaves client device) |
+| **Master Identity Secret & Salt** | Local Witness Enclave | 🔒 **Private** |
+| **Anonymous Action Nullifier** | Midnight Public Ledger | 🌍 **Public** (Unlinkable Sybil-Resistant ID) |
+| **Eligibility Result & Verified Tier** | Midnight Public Ledger | 🌍 **Public** (Verifiable on-chain) |
+| **Verification Timestamp & Expiry** | Midnight Public Ledger | 🌍 **Public** |
 
-### Circuit Logic (`verifyEligibility`)
-1. Ingests the `localAge` from the user's secure wallet enclave (witness).
-2. Asserts `localAge >= threshold` within the ZK circuit.
-3. Outputs `true` to the ledger if the proof succeeds. If the proof fails, the transaction aborts and nothing is recorded.
+### ⚡ Level 5 Compact Circuits
+
+1. **`verifyEligibility(user, threshold, timestamp)` (Standard Age Gate):**
+   - Ingests `localAge` and `localCredentialExpiry` from private witness enclaves.
+   - Asserts age meets threshold and credential has not expired or been revoked.
+2. **`verifyDateOfBirthProof(nullifier, currentYear, currentMonth, currentDay, thresholdYears, timestamp)` (DOB Calendar Arithmetic):**
+   - Ingests `(localBirthYear, localBirthMonth, localBirthDay)`.
+   - Computes day-accurate cryptographic proof: `(currentYear - birthYear > threshold) || (yearDiff == threshold && currentMonth > birthMonth) || (yearDiff == threshold && currentMonth == birthMonth && currentDay >= birthDay)`.
+   - Preserves complete zero-knowledge privacy with 0 leak of birthdate.
+3. **`verifyTieredAccess(nullifier, requiredTier, currentTimestamp)` (Multi-Tier Permission):**
+   - **Tier 1 (≥ 13):** Teen & Social Platforms
+   - **Tier 2 (≥ 18):** Web3 Gaming & General dApps
+   - **Tier 3 (≥ 21):** DeFi & Regulated Financial Protocols
+   - **Tier 4 (≥ 25):** Accredited / Institutional Access
+4. **`revokeCredential(nullifier)` (Credential Revocation):**
+   - Revocation blacklist registry circuit ensuring compromised or outdated credentials cannot be reused.
+
 
 ## 🚀 Setup and Local Run
 

@@ -17,4 +17,9 @@ export type CompactMap<K, V> = {
 export type AgeLedger = {
   readonly eligible: CompactMap<Uint8Array, boolean>;
   readonly verification_timestamp: CompactMap<Uint8Array, bigint>;
+  readonly nullifier_registry: CompactMap<Uint8Array, boolean>;
+  readonly nullifier_tier: CompactMap<Uint8Array, bigint>;
+  readonly nullifier_expiry: CompactMap<Uint8Array, bigint>;
+  readonly revoked_nullifiers: CompactMap<Uint8Array, boolean>;
+  readonly contract_admin: Uint8Array;
 };

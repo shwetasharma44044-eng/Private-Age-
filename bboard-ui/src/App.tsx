@@ -11,6 +11,11 @@ const App: React.FC = () => {
   const [derivedState, setDerivedState] = useState<AgeGateDerivedState | null>(null);
   const [age, setAge] = useState<number>(18);
   const [threshold, setThreshold] = useState<number>(18);
+  const [verificationMode, setVerificationMode] = useState<'age' | 'dob' | 'tier'>('age');
+  const [birthYear, setBirthYear] = useState<number>(2005);
+  const [birthMonth, setBirthMonth] = useState<number>(9);
+  const [birthDay, setBirthDay] = useState<number>(15);
+  const [selectedTier, setSelectedTier] = useState<number>(2);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [joinAddress, setJoinAddress] = useState<string>('');
@@ -102,7 +107,13 @@ const App: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      await deploymentState.api.verify(age, threshold);
+      if (verificationMode === 'dob') {
+        await deploymentState.api.verifyDOB(birthYear, birthMonth, birthDay, threshold);
+      } else if (verificationMode === 'tier') {
+        await deploymentState.api.verifyTier(selectedTier);
+      } else {
+        await deploymentState.api.verify(age, threshold);
+      }
       setLoading(false);
     } catch (err: unknown) {
       setLoading(false);
@@ -400,34 +411,149 @@ const App: React.FC = () => {
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1.5">
-                          <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
-                            Your Exact Age (Private)
-                          </label>
-                          <input
-                            type="number"
-                            min="1"
-                            value={age}
-                            onChange={(e) => setAge(Math.max(1, parseInt(e.target.value) || 0))}
-                            disabled={loading}
-                            className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-white text-base font-mono focus:outline-none focus:border-[#7c6cff] transition-colors"
-                          />
-                        </div>
-                        <div className="space-y-1.5">
-                          <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
-                            Required Threshold
-                          </label>
-                          <input
-                            type="number"
-                            min="1"
-                            value={threshold}
-                            onChange={(e) => setThreshold(Math.max(1, parseInt(e.target.value) || 0))}
-                            disabled={loading}
-                            className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-white text-base font-mono focus:outline-none focus:border-[#7c6cff] transition-colors"
-                          />
-                        </div>
+                      {/* Level 5 Mode Switcher Tabs */}
+                      <div className="flex bg-[#0d0e18] p-1 rounded-xl border border-white/[0.08] text-xs font-semibold">
+                        <button
+                          type="button"
+                          onClick={() => setVerificationMode('age')}
+                          className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                            verificationMode === 'age'
+                              ? 'bg-gradient-to-r from-[#6c5cff] to-[#7c6cff] text-white shadow-md'
+                              : 'text-[#9496ab] hover:text-white'
+                          }`}
+                        >
+                          Age Threshold
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setVerificationMode('dob')}
+                          className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                            verificationMode === 'dob'
+                              ? 'bg-gradient-to-r from-[#6c5cff] to-[#7c6cff] text-white shadow-md'
+                              : 'text-[#9496ab] hover:text-white'
+                          }`}
+                        >
+                          Birthdate ZK Proof
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setVerificationMode('tier')}
+                          className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                            verificationMode === 'tier'
+                              ? 'bg-gradient-to-r from-[#6c5cff] to-[#7c6cff] text-white shadow-md'
+                              : 'text-[#9496ab] hover:text-white'
+                          }`}
+                        >
+                          Compliance Tier
+                        </button>
                       </div>
+
+                      {verificationMode === 'age' && (
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
+                              Your Age (Private Witness)
+                            </label>
+                            <input
+                              type="number"
+                              min="1"
+                              value={age}
+                              onChange={(e) => setAge(Math.max(1, parseInt(e.target.value) || 0))}
+                              disabled={loading}
+                              className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-white text-base font-mono focus:outline-none focus:border-[#7c6cff] transition-colors"
+                            />
+                          </div>
+                          <div className="space-y-1.5">
+                            <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
+                              Required Threshold
+                            </label>
+                            <input
+                              type="number"
+                              min="1"
+                              value={threshold}
+                              onChange={(e) => setThreshold(Math.max(1, parseInt(e.target.value) || 0))}
+                              disabled={loading}
+                              className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-white text-base font-mono focus:outline-none focus:border-[#7c6cff] transition-colors"
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {verificationMode === 'dob' && (
+                        <div className="space-y-3">
+                          <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
+                            Exact Birthdate (Encrypted in Witness Enclave)
+                          </label>
+                          <div className="grid grid-cols-3 gap-3">
+                            <div>
+                              <span className="text-[11px] text-[#5e6078] block mb-1">Year</span>
+                              <input
+                                type="number"
+                                min="1920"
+                                max="2026"
+                                value={birthYear}
+                                onChange={(e) => setBirthYear(parseInt(e.target.value) || 2005)}
+                                disabled={loading}
+                                className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-3 py-2.5 text-white text-sm font-mono focus:outline-none focus:border-[#7c6cff]"
+                              />
+                            </div>
+                            <div>
+                              <span className="text-[11px] text-[#5e6078] block mb-1">Month</span>
+                              <input
+                                type="number"
+                                min="1"
+                                max="12"
+                                value={birthMonth}
+                                onChange={(e) => setBirthMonth(parseInt(e.target.value) || 1)}
+                                disabled={loading}
+                                className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-3 py-2.5 text-white text-sm font-mono focus:outline-none focus:border-[#7c6cff]"
+                              />
+                            </div>
+                            <div>
+                              <span className="text-[11px] text-[#5e6078] block mb-1">Day</span>
+                              <input
+                                type="number"
+                                min="1"
+                                max="31"
+                                value={birthDay}
+                                onChange={(e) => setBirthDay(parseInt(e.target.value) || 1)}
+                                disabled={loading}
+                                className="w-full bg-[#0d0e18] border border-white/[0.1] rounded-xl px-3 py-2.5 text-white text-sm font-mono focus:outline-none focus:border-[#7c6cff]"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {verificationMode === 'tier' && (
+                        <div className="space-y-3">
+                          <label className="text-[#9496ab] text-xs font-semibold uppercase tracking-wider block">
+                            Select Compliance Tier
+                          </label>
+                          <div className="grid grid-cols-2 gap-2.5">
+                            {[
+                              { tier: 1, title: 'Tier 1 (≥ 13)', desc: 'Social & Chat' },
+                              { tier: 2, title: 'Tier 2 (≥ 18)', desc: 'Web3 & Gaming' },
+                              { tier: 3, title: 'Tier 3 (≥ 21)', desc: 'DeFi & Finance' },
+                              { tier: 4, title: 'Tier 4 (≥ 25)', desc: 'Accredited Gate' },
+                            ].map((item) => (
+                              <button
+                                key={item.tier}
+                                type="button"
+                                onClick={() => setSelectedTier(item.tier)}
+                                className={`p-3 rounded-xl text-left border transition-all ${
+                                  selectedTier === item.tier
+                                    ? 'bg-[#7c6cff]/15 border-[#7c6cff] text-white shadow-sm'
+                                    : 'bg-[#0d0e18] border-white/[0.08] text-[#9496ab] hover:border-white/20'
+                                }`}
+                              >
+                                <p className="text-xs font-bold text-white">{item.title}</p>
+                                <p className="text-[11px] text-[#5e6078]">{item.desc}</p>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
                       <button
                         onClick={handleVerify}
@@ -436,7 +562,7 @@ const App: React.FC = () => {
                       >
                         {loading ? (
                           <>
-                            <Loader2 className="w-5 h-5 animate-spin" /> Generating Proof...
+                            <Loader2 className="w-5 h-5 animate-spin" /> Generating ZK Proof...
                           </>
                         ) : (
                           'Generate ZK Proof & Verify'

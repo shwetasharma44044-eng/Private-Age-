@@ -22,6 +22,13 @@ export interface DeployedAgeGateAPI {
   readonly state$: Observable<AgeGateDerivedState>;
 
   verify: (age: number, threshold: number) => Promise<void>;
+  verifyDOB: (
+    birthYear: number,
+    birthMonth: number,
+    birthDay: number,
+    thresholdYears: number,
+  ) => Promise<void>;
+  verifyTier: (tier: number) => Promise<void>;
 }
 
 export class AgeGateAPI implements DeployedAgeGateAPI {
@@ -65,11 +72,40 @@ export class AgeGateAPI implements DeployedAgeGateAPI {
 
         let isEligible = false;
         let timestamp: bigint | undefined = undefined;
+        let verifiedTier: number | undefined = undefined;
+        let isRevoked = false;
 
         if (ledgerState.eligible) {
           for (const [key, val] of ledgerState.eligible) {
             if (toHex(key) === userPubKeyHex) {
               isEligible = val;
+              break;
+            }
+          }
+        }
+
+        if (ledgerState.nullifier_registry) {
+          for (const [key, val] of ledgerState.nullifier_registry) {
+            if (toHex(key) === userPubKeyHex) {
+              isEligible = val;
+              break;
+            }
+          }
+        }
+
+        if (ledgerState.nullifier_tier) {
+          for (const [key, val] of ledgerState.nullifier_tier) {
+            if (toHex(key) === userPubKeyHex) {
+              verifiedTier = Number(val);
+              break;
+            }
+          }
+        }
+
+        if (ledgerState.revoked_nullifiers) {
+          for (const [key, val] of ledgerState.revoked_nullifiers) {
+            if (toHex(key) === userPubKeyHex) {
+              isRevoked = val;
               break;
             }
           }
@@ -88,6 +124,8 @@ export class AgeGateAPI implements DeployedAgeGateAPI {
           isEligible,
           timestamp,
           userPublicKey: userPubKeyHex,
+          verifiedTier,
+          isRevoked,
         };
       }),
     );
@@ -99,7 +137,7 @@ export class AgeGateAPI implements DeployedAgeGateAPI {
     const existingPrivateState = await this.providers.privateStateProvider.get(
       ageGatePrivateStateKey,
     );
-    const updatedPrivateState = {
+    const updatedPrivateState: AgeGatePrivateState = {
       ...existingPrivateState,
       age: BigInt(age),
     };
@@ -125,6 +163,81 @@ export class AgeGateAPI implements DeployedAgeGateAPI {
         blockHeight: txData.public.blockHeight,
       },
     });
+  }
+
+  async verifyDOB(
+    birthYear: number,
+    birthMonth: number,
+    birthDay: number,
+    thresholdYears: number,
+  ): Promise<void> {
+    this.logger?.info(
+      `Verifying DOB proof: Year ${birthYear}/${birthMonth}/${birthDay} threshold: ${thresholdYears}`,
+    );
+
+    const existingPrivateState = await this.providers.privateStateProvider.get(
+      ageGatePrivateStateKey,
+    );
+    const calculatedAge = BigInt(2026 - birthYear);
+    const updatedPrivateState: AgeGatePrivateState = {
+      ...existingPrivateState,
+      age: calculatedAge,
+      birthYear: BigInt(birthYear),
+      birthMonth: BigInt(birthMonth),
+      birthDay: BigInt(birthDay),
+    };
+    await this.providers.privateStateProvider.set(
+      ageGatePrivateStateKey,
+      updatedPrivateState,
+    );
+
+    const userPubKeyHex = this.providers.walletProvider.getCoinPublicKey();
+    const userPubKeyBytes = fromHex(userPubKeyHex);
+    const now = new Date();
+    const currentYear = BigInt(now.getFullYear() > 2024 ? now.getFullYear() : 2026);
+    const currentMonth = BigInt(now.getMonth() + 1);
+    const currentDay = BigInt(now.getDate());
+    const timestamp = BigInt(Date.now());
+
+    if (this.deployedContract.callTx.verifyDateOfBirthProof) {
+      await this.deployedContract.callTx.verifyDateOfBirthProof(
+        userPubKeyBytes,
+        currentYear,
+        currentMonth,
+        currentDay,
+        BigInt(thresholdYears),
+        timestamp,
+      );
+    } else {
+      await this.deployedContract.callTx.verifyEligibility(
+        userPubKeyBytes,
+        BigInt(thresholdYears),
+        timestamp,
+      );
+    }
+  }
+
+  async verifyTier(tier: number): Promise<void> {
+    this.logger?.info(`Verifying compliance Tier: ${tier}`);
+
+    const userPubKeyHex = this.providers.walletProvider.getCoinPublicKey();
+    const userPubKeyBytes = fromHex(userPubKeyHex);
+    const timestamp = BigInt(Date.now());
+
+    if (this.deployedContract.callTx.verifyTieredAccess) {
+      await this.deployedContract.callTx.verifyTieredAccess(
+        userPubKeyBytes,
+        BigInt(tier),
+        timestamp,
+      );
+    } else {
+      const tierThreshold = tier === 1 ? 13 : tier === 2 ? 18 : tier === 3 ? 21 : 25;
+      await this.deployedContract.callTx.verifyEligibility(
+        userPubKeyBytes,
+        BigInt(tierThreshold),
+        timestamp,
+      );
+    }
   }
 
   static async deploy(

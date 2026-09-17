@@ -2,20 +2,146 @@ pragma language_version 0.23;
 
 import CompactStandardLibrary;
 
+// ==========================================
+// Public Ledger State (On-Chain Storage)
+// ==========================================
 export ledger eligible: Map<Bytes<32>, Boolean>;
 export ledger verification_timestamp: Map<Bytes<32>, Uint<64>>;
+export ledger nullifier_registry: Map<Bytes<32>, Boolean>;
+export ledger nullifier_tier: Map<Bytes<32>, Uint<32>>;
+export ledger nullifier_expiry: Map<Bytes<32>, Uint<64>>;
+export ledger revoked_nullifiers: Map<Bytes<32>, Boolean>;
+export ledger contract_admin: Bytes<32>;
 
+// ==========================================
+// Contract Constructor
+// ==========================================
 constructor() {
 }
 
+// ==========================================
+// Private Witnesses (Evaluated inside Local Enclave)
+// ==========================================
 witness localAge(): Uint<32>;
+witness localBirthYear(): Uint<32>;
+witness localBirthMonth(): Uint<32>;
+witness localBirthDay(): Uint<32>;
+witness localIdentitySecret(): Bytes<32>;
+witness localCredentialExpiry(): Uint<64>;
 
+// ==========================================
+// Circuit 1: Standard Age Threshold Verification
+// ==========================================
 export circuit verifyEligibility(user: Bytes<32>, threshold: Uint<32>, timestamp: Uint<64>): Boolean {
   const age = localAge();
+  const expiry = localCredentialExpiry();
+  
+  // Assert credential has not expired
+  if (expiry > 0) {
+    assert(timestamp <= expiry, "Identity credential has expired");
+  }
+
+  // Assert user is not revoked
+  assert(!revoked_nullifiers.member(user), "User identifier has been revoked");
+
+  // Zero-Knowledge assertion: age meets required threshold
   assert(age >= threshold, "User age is below the required threshold");
   
   eligible.insert(disclose(user), disclose(true));
   verification_timestamp.insert(disclose(user), disclose(timestamp));
   
+  return true;
+}
+
+// ==========================================
+// Circuit 2: Date-of-Birth (DOB) Calendar Proof Circuit
+// Proves user was born before a cutoff date with exact Day/Month/Year math
+// ==========================================
+export circuit verifyDateOfBirthProof(
+  nullifier: Bytes<32>,
+  currentYear: Uint<32>,
+  currentMonth: Uint<32>,
+  currentDay: Uint<32>,
+  thresholdYears: Uint<32>,
+  timestamp: Uint<64>
+): Boolean {
+  const birthYear = localBirthYear();
+  const birthMonth = localBirthMonth();
+  const birthDay = localBirthDay();
+  const expiry = localCredentialExpiry();
+
+  // Validate expiry and revocation
+  if (expiry > 0) {
+    assert(timestamp <= expiry, "Identity credential has expired");
+  }
+  assert(!revoked_nullifiers.member(nullifier), "Nullifier has been revoked");
+
+  // Date of birth bounds assertion
+  assert(birthMonth >= 1 && birthMonth <= 12, "Invalid birth month");
+  assert(birthDay >= 1 && birthDay <= 31, "Invalid birth day");
+  assert(currentYear >= birthYear, "Current year cannot be before birth year");
+
+  // Calculate year difference
+  const yearDiff = currentYear - birthYear;
+  
+  // Exact cryptographic age eligibility verification
+  const isEligible = (yearDiff > thresholdYears) ||
+    (yearDiff == thresholdYears && currentMonth > birthMonth) ||
+    (yearDiff == thresholdYears && currentMonth == birthMonth && currentDay >= birthDay);
+
+  assert(isEligible, "Date-of-Birth does not satisfy the age threshold requirement");
+
+  // Record verified anonymous nullifier without disclosing birth date
+  nullifier_registry.insert(disclose(nullifier), disclose(true));
+  verification_timestamp.insert(disclose(nullifier), disclose(timestamp));
+
+  return true;
+}
+
+// ==========================================
+// Circuit 3: Multi-Tier Access Verification
+// Tier 1: Age >= 13 (Social / Teen)
+// Tier 2: Age >= 18 (Adult / Gaming)
+// Tier 3: Age >= 21 (DeFi / Financial)
+// Tier 4: Age >= 25 (Accredited Gate)
+// ==========================================
+export circuit verifyTieredAccess(
+  nullifier: Bytes<32>,
+  requiredTier: Uint<32>,
+  currentTimestamp: Uint<64>
+): Boolean {
+  const age = localAge();
+  const expiry = localCredentialExpiry();
+
+  if (expiry > 0) {
+    assert(currentTimestamp <= expiry, "Credential has expired");
+  }
+  assert(!revoked_nullifiers.member(nullifier), "Nullifier has been revoked");
+
+  // Map tier to age threshold
+  if (requiredTier == 1) {
+    assert(age >= 13, "Age requirement not met for Tier 1 (Age >= 13)");
+  } else if (requiredTier == 2) {
+    assert(age >= 18, "Age requirement not met for Tier 2 (Age >= 18)");
+  } else if (requiredTier == 3) {
+    assert(age >= 21, "Age requirement not met for Tier 3 (Age >= 21)");
+  } else if (requiredTier == 4) {
+    assert(age >= 25, "Age requirement not met for Tier 4 (Age >= 25)");
+  } else {
+    assert(false, "Invalid compliance tier requested");
+  }
+
+  nullifier_registry.insert(disclose(nullifier), disclose(true));
+  nullifier_tier.insert(disclose(nullifier), disclose(requiredTier));
+  verification_timestamp.insert(disclose(nullifier), disclose(currentTimestamp));
+
+  return true;
+}
+
+// ==========================================
+// Circuit 4: Revocation Circuit
+// ==========================================
+export circuit revokeCredential(nullifier: Bytes<32>): Boolean {
+  revoked_nullifiers.insert(disclose(nullifier), disclose(true));
   return true;
 }
