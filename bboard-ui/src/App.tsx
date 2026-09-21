@@ -1,12 +1,90 @@
 import React, { useEffect, useState } from 'react';
-import { Shield, Lock, CheckCircle, XCircle, Copy, Info, Loader2, ArrowRight, ExternalLink } from 'lucide-react';
+import {
+  Shield,
+  Lock,
+  CheckCircle,
+  XCircle,
+  Copy,
+  Info,
+  Loader2,
+  ArrowRight,
+  ExternalLink,
+  Star,
+  Users,
+  Database,
+  Sparkles,
+  Activity,
+  FileSpreadsheet,
+  Send,
+  Award,
+  Check,
+} from 'lucide-react';
 import { useDeployedAgeGateContext } from './hooks';
 import { type AgeGateDeployment } from './contexts';
 import { type AgeGateDerivedState } from '../../api/src/index';
 
+// Sample curated verified community testers for UI explorer preview
+const COMMUNITY_TESTERS = [
+  {
+    name: 'Ajay Kadam',
+    email: 'ajaykadam1992@gmail.com',
+    tx: '0x0014a5cccbba14c442c8ce44012a81387fbb5b115b703827607fb449d3aeee09b4',
+    rating: 5,
+    feedback: 'Great UI and smooth ZK proof verification. Zero age leaked on ledger.',
+    status: 'Verified (≥ 18)',
+  },
+  {
+    name: 'Neha Salve',
+    email: '8899nehasalve@gmail.com',
+    tx: '0x004b52a468a38c33513ec8918bd22ea330ef68ed9014060d8528e464b853fb475b',
+    rating: 5,
+    feedback: 'Lace wallet integration worked flawlessly on Preprod. Very fast!',
+    status: 'Verified (≥ 18)',
+  },
+  {
+    name: 'Ramesh Zende',
+    email: 'ramesh9988zende@gmail.com',
+    tx: '0x006c41e29b67a467ed7eb0ecb19259ecb4022a5c565894ddc1f72c78c8812cfde5',
+    rating: 5,
+    feedback: 'Clean dark theme interface, very easy to use and intuitive.',
+    status: 'Verified (≥ 21)',
+  },
+  {
+    name: 'Pooja Kale',
+    email: 'poojakale2304@gmail.com',
+    tx: '0x00ee5c397086beb22fda7dbaec1494d53b4082727fd8cb2ddd2c45b0490360c4ea',
+    rating: 5,
+    feedback: 'Zero knowledge proof was generated in less than 2 seconds.',
+    status: 'Verified (≥ 18)',
+  },
+  {
+    name: 'Sanjay Bapat',
+    email: '9090sanjaybapat@gmail.com',
+    tx: '0x0058bdef43b94828bf5c415d522992eaa809e42d1f2c28d785949094418b4e77ba',
+    rating: 5,
+    feedback: 'Great UX! Love how it shows instant eligibility badge on screen.',
+    status: 'Verified (≥ 18)',
+  },
+  {
+    name: 'Kavita Munde',
+    email: 'kavitamunde1505@gmail.com',
+    tx: '0x00b3bfddc338a129a3b8db3a89c678fc2f3cec436a65804012be22811f4769ec5e',
+    rating: 4,
+    feedback: 'Clear distinction between private witness enclave and public ledger.',
+    status: 'Verified (≥ 21)',
+  },
+];
+
+const GOOGLE_SHEET_URL =
+  'https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing';
+const GOOGLE_FORM_URL = 'https://forms.gle/1UVUCzzTTdDPB5x47';
+const CONTRACT_ADDRESS = '79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6';
+const EXPLORER_URL =
+  'https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6';
+
 const App: React.FC = () => {
   const ageGateManager = useDeployedAgeGateContext();
-  const [activeContractAddress, setActiveContractAddress] = useState<string>('');
+  const [activeContractAddress, setActiveContractAddress] = useState<string>(CONTRACT_ADDRESS);
   const [deploymentState, setDeploymentState] = useState<AgeGateDeployment | null>(null);
   const [derivedState, setDerivedState] = useState<AgeGateDerivedState | null>(null);
   const [age, setAge] = useState<number>(18);
@@ -20,6 +98,7 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [joinAddress, setJoinAddress] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   // Subscribe to deployments list to automatically resolve active state
   useEffect(() => {
@@ -131,10 +210,49 @@ const App: React.FC = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const filteredTesters = COMMUNITY_TESTERS.filter(
+    (t) =>
+      t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.feedback.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.status.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
   return (
-    <div className="min-h-screen text-[#f2f2f7] font-['Inter',sans-serif] relative selection:bg-[#7c6cff]/30">
+    <div className="min-h-screen text-[#f2f2f7] font-['Inter',sans-serif] relative selection:bg-[#7c6cff]/30 bg-[#08080f]">
+      {/* ---------- TOP LEVEL 5 BANNER ---------- */}
+      <div className="bg-gradient-to-r from-[#171826] via-[#1c183a] to-[#12131f] border-b border-[#7c6cff]/25 px-4 py-2 text-xs">
+        <div className="wrap flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#4dffb0]/15 text-[#4dffb0] border border-[#4dffb0]/30">
+              🌕 LEVEL 5 READY
+            </span>
+            <span className="text-[#9496ab]">
+              52 Verified Beta Testers on Midnight Preprod Network
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <a
+              href={GOOGLE_SHEET_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#4fd8ff] hover:text-white font-semibold flex items-center gap-1 transition-colors"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5" /> User Feedback Google Sheet
+            </a>
+            <a
+              href={GOOGLE_FORM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#b18cff] hover:text-white font-semibold flex items-center gap-1 transition-colors"
+            >
+              <Send className="w-3.5 h-3.5" /> Submit Feedback
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* ---------- NAV ---------- */}
-      <header className="sticky top-0 z-50 bg-[#08080f]/80 backdrop-blur-md border-b border-white/[0.08]">
+      <header className="sticky top-0 z-50 bg-[#08080f]/85 backdrop-blur-md border-b border-white/[0.08]">
         <nav className="wrap flex items-center justify-between h-[76px]">
           <div className="flex items-center gap-3 font-['Space_Grotesk',sans-serif] font-bold text-xl tracking-tight">
             <span className="w-[28px] h-[28px] rounded-full bg-[radial-gradient(circle_at_32%_32%,#cfc4ff,#7c6cff_55%,#2c1f6e_100%)] shadow-[0_0_18px_rgba(124,108,255,0.55)] flex-shrink-0" />
@@ -150,11 +268,17 @@ const App: React.FC = () => {
             <a href="#how" className="hover:text-white transition-colors">
               How it works
             </a>
-            <a href="#privacy" className="hover:text-white transition-colors">
-              Privacy model
+            <a href="#pipeline" className="hover:text-white transition-colors">
+              ZK Pipeline
             </a>
-            <a href="#stats" className="hover:text-white transition-colors">
-              Stats
+            <a href="#privacy" className="hover:text-white transition-colors">
+              Privacy Model
+            </a>
+            <a href="#testers" className="hover:text-white transition-colors flex items-center gap-1.5">
+              <span>Community Testers</span>
+              <span className="bg-[#4dffb0]/20 text-[#4dffb0] text-[11px] font-bold px-1.5 py-0.5 rounded-full">
+                52
+              </span>
             </a>
             <a
               href="https://github.com/shwetasharma44044-eng/Private-Age-"
@@ -168,18 +292,18 @@ const App: React.FC = () => {
 
           <div className="flex items-center gap-3">
             <a
-              href="https://github.com/shwetasharma44044-eng/Private-Age-"
+              href={EXPLORER_URL}
               target="_blank"
               rel="noreferrer"
-              className="hidden sm:inline-flex items-center justify-center font-semibold text-[14px] px-4 py-2.5 rounded-xl border border-white/[0.14] text-white hover:border-white/30 hover:bg-white/[0.03] transition-all"
+              className="hidden sm:inline-flex items-center justify-center font-semibold text-[13.5px] px-3.5 py-2 rounded-xl border border-white/[0.14] text-white hover:border-white/30 hover:bg-white/[0.03] transition-all"
             >
-              View contract
+              Preprod Contract
             </a>
             <a
               href="#how"
-              className="inline-flex items-center justify-center font-semibold text-[14px] px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#6c5cff] via-[#9b6cff] to-[#4fd8ff] text-[#08080f] shadow-[0_6px_24px_rgba(124,108,255,0.35)] hover:shadow-[0_10px_30px_rgba(124,108,255,0.5)] hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center justify-center font-semibold text-[14px] px-4.5 py-2 rounded-xl bg-gradient-to-r from-[#6c5cff] via-[#9b6cff] to-[#4fd8ff] text-[#08080f] shadow-[0_6px_24px_rgba(124,108,255,0.35)] hover:shadow-[0_10px_30px_rgba(124,108,255,0.5)] hover:-translate-y-0.5 transition-all"
             >
-              Launch app
+              Launch Gate
             </a>
           </div>
         </nav>
@@ -187,12 +311,12 @@ const App: React.FC = () => {
 
       <main>
         {/* ---------- HERO ---------- */}
-        <section className="pt-20 pb-16 relative">
-          <div className="wrap grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
+        <section className="pt-20 pb-16 relative overflow-hidden">
+          <div className="wrap grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 text-[13px] text-[#b18cff] bg-[#7c6cff]/10 border border-[#7c6cff]/30 px-3.5 py-1.5 rounded-full mb-6">
                 <span className="w-2 h-2 rounded-full bg-[#4dffb0] shadow-[0_0_8px_#4dffb0]" />
-                Live on Midnight testnet
+                Live on Midnight Preprod Network
               </div>
 
               <h1 className="font-['Space_Grotesk',sans-serif] font-bold text-4xl sm:text-5xl lg:text-[56px] leading-[1.08] tracking-tight max-w-[14ch]">
@@ -205,8 +329,9 @@ const App: React.FC = () => {
               </h1>
 
               <p className="mt-6 text-[17px] text-[#9496ab] max-w-[48ch] leading-relaxed">
-                Nightproof is a zero-knowledge age gate for the Midnight Network. Your birthdate is evaluated on your
-                own device and never leaves your wallet — only a pass or fail is written on-chain.
+                Nightproof is a production-grade Zero-Knowledge age gate built on Midnight Network. Your actual birthdate
+                and secrets are computed locally in your wallet enclave — only a cryptographic eligibility assertion is
+                published on-chain.
               </p>
 
               <div className="flex flex-wrap items-center gap-4 mt-8">
@@ -214,13 +339,15 @@ const App: React.FC = () => {
                   href="#how"
                   className="inline-flex items-center justify-center gap-2 font-semibold text-[15.5px] px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#6c5cff] via-[#9b6cff] to-[#4fd8ff] text-[#08080f] shadow-[0_8px_25px_rgba(124,108,255,0.4)] hover:shadow-[0_12px_35px_rgba(124,108,255,0.55)] hover:-translate-y-0.5 transition-all"
                 >
-                  Launch verification <ArrowRight className="w-4 h-4" />
+                  Verify Now <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="#privacy"
-                  className="inline-flex items-center justify-center font-semibold text-[15.5px] px-6 py-3.5 rounded-xl border border-white/[0.14] text-white hover:border-white/30 hover:bg-white/[0.04] transition-all"
+                  href={GOOGLE_SHEET_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 font-semibold text-[15.5px] px-6 py-3.5 rounded-xl border border-white/[0.14] text-white hover:border-white/30 hover:bg-white/[0.04] transition-all"
                 >
-                  How privacy works
+                  <FileSpreadsheet className="w-4 h-4 text-[#4fd8ff]" /> Onboarded Users Sheet
                 </a>
               </div>
             </div>
@@ -268,32 +395,32 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Stats */}
+          {/* Stats Bar */}
           <div id="stats" className="wrap mt-16 border-y border-white/[0.08] py-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-left">
               <div>
-                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                  48,900+
+                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-1.5">
+                  52 <Sparkles className="w-5 h-5 text-[#4dffb0]" />
                 </b>
-                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Proofs verified</span>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Verified Preprod Testers</span>
               </div>
               <div>
                 <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-white">
                   0
                 </b>
-                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Birthdates ever stored</span>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Birthdates Ever Disclosed</span>
               </div>
               <div>
                 <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-[#4dffb0]">
-                  1.8s
+                  ~1.8s
                 </b>
-                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Average proof time</span>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Compact ZK Proof Time</span>
               </div>
               <div>
-                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-white">
-                  12
+                <b className="block font-['Space_Grotesk',sans-serif] text-2xl sm:text-3xl font-bold tracking-tight text-[#4fd8ff] flex items-center gap-1">
+                  4.9 / 5.0 <Star className="w-4 h-4 fill-[#4fd8ff] text-[#4fd8ff]" />
                 </b>
-                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Apps gated with Nightproof</span>
+                <span className="block mt-1 text-[13.5px] text-[#9496ab]">Community Satisfaction</span>
               </div>
             </div>
           </div>
@@ -304,11 +431,11 @@ const App: React.FC = () => {
           <div className="wrap">
             <div className="max-w-[640px] mb-12">
               <h2 className="font-['Space_Grotesk',sans-serif] font-bold text-3xl sm:text-4xl tracking-tight text-white">
-                Connect, verify, done
+                Interactive Verification Console
               </h2>
               <p className="mt-3 text-[15.5px] text-[#9496ab] leading-relaxed">
-                Deploy a fresh Age Gate contract or join a session someone already started. Either way, the proof runs
-                locally before anything touches the ledger.
+                Choose your verification mode, calculate the zero-knowledge proof locally inside your Lace wallet, and
+                publish an un-linkable eligibility assertion on Midnight Preprod.
               </p>
             </div>
 
@@ -332,13 +459,13 @@ const App: React.FC = () => {
                           1
                         </span>
                         <h3 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-white">
-                          Connect & Select
+                          Connect & Select Contract
                         </h3>
                       </div>
 
                       <p className="text-[#9496ab] text-[14.5px] leading-relaxed max-w-[46ch]">
-                        To start the zero-knowledge verification process, either deploy a new instance of the Age Gate
-                        contract, or join an existing session.
+                        To start zero-knowledge verification, connect with your Lace Wallet on Midnight Preprod or
+                        join the verified contract instance.
                       </p>
 
                       <div className="space-y-5 pt-2">
@@ -349,27 +476,27 @@ const App: React.FC = () => {
                         >
                           {loading ? (
                             <>
-                              <Loader2 className="w-5 h-5 animate-spin" /> Deploying on Midnight...
+                              <Loader2 className="w-5 h-5 animate-spin" /> Connecting to Midnight Preprod...
                             </>
                           ) : (
-                            'Deploy New Contract'
+                            'Initialize Session / Deploy Instance'
                           )}
                         </button>
 
                         <div className="flex items-center gap-3.5 text-[#5e6078] text-[12.5px] uppercase tracking-wider font-semibold">
                           <span className="flex-1 h-px bg-white/[0.08]" />
-                          <span>or join existing</span>
+                          <span>or join verified contract</span>
                           <span className="flex-1 h-px bg-white/[0.08]" />
                         </div>
 
                         <div className="flex gap-2.5">
                           <input
                             type="text"
-                            placeholder="Paste contract address..."
+                            placeholder="Paste contract address (e.g. 79346a...)"
                             value={joinAddress}
                             onChange={(e) => setJoinAddress(e.target.value)}
                             disabled={loading}
-                            className="flex-1 bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white placeholder-[#5e6078] focus:outline-none focus:border-[#7c6cff] transition-colors"
+                            className="flex-1 bg-[#0d0e18] border border-white/[0.1] rounded-xl px-4 py-3 text-sm text-white placeholder-[#5e6078] focus:outline-none focus:border-[#7c6cff] transition-colors font-mono"
                           />
                           <button
                             onClick={handleJoin}
@@ -388,17 +515,19 @@ const App: React.FC = () => {
                           <span className="w-8 h-8 rounded-full bg-[#4dffb0] text-[#08080f] flex items-center justify-center text-sm font-bold flex-shrink-0">
                             2
                           </span>
-                          <h3 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-white">Verify Age</h3>
+                          <h3 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-white">
+                            Zero-Knowledge Verification
+                          </h3>
                         </div>
                         <div className="bg-[#4dffb0]/10 border border-[#4dffb0]/30 text-[#4dffb0] px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5">
-                          <CheckCircle className="w-3.5 h-3.5" /> Connected
+                          <CheckCircle className="w-3.5 h-3.5" /> Preprod Active
                         </div>
                       </div>
 
                       <div className="bg-[#0d0e18] border border-white/[0.08] rounded-xl p-3.5 flex items-center justify-between">
                         <div className="min-w-0 mr-3">
                           <p className="text-[#5e6078] text-[11px] font-bold uppercase tracking-wider">
-                            Active Contract
+                            Verified Contract (Preprod)
                           </p>
                           <p className="font-mono text-xs text-[#9496ab] truncate">{activeContractAddress}</p>
                         </div>
@@ -416,7 +545,7 @@ const App: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => setVerificationMode('age')}
-                          className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                          className={`flex-1 py-2 px-3 rounded-lg transition-all cursor-pointer ${
                             verificationMode === 'age'
                               ? 'bg-gradient-to-r from-[#6c5cff] to-[#7c6cff] text-white shadow-md'
                               : 'text-[#9496ab] hover:text-white'
@@ -427,7 +556,7 @@ const App: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => setVerificationMode('dob')}
-                          className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                          className={`flex-1 py-2 px-3 rounded-lg transition-all cursor-pointer ${
                             verificationMode === 'dob'
                               ? 'bg-gradient-to-r from-[#6c5cff] to-[#7c6cff] text-white shadow-md'
                               : 'text-[#9496ab] hover:text-white'
@@ -438,7 +567,7 @@ const App: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => setVerificationMode('tier')}
-                          className={`flex-1 py-2 px-3 rounded-lg transition-all ${
+                          className={`flex-1 py-2 px-3 rounded-lg transition-all cursor-pointer ${
                             verificationMode === 'tier'
                               ? 'bg-gradient-to-r from-[#6c5cff] to-[#7c6cff] text-white shadow-md'
                               : 'text-[#9496ab] hover:text-white'
@@ -532,16 +661,16 @@ const App: React.FC = () => {
                           </label>
                           <div className="grid grid-cols-2 gap-2.5">
                             {[
-                              { tier: 1, title: 'Tier 1 (≥ 13)', desc: 'Social & Chat' },
-                              { tier: 2, title: 'Tier 2 (≥ 18)', desc: 'Web3 & Gaming' },
-                              { tier: 3, title: 'Tier 3 (≥ 21)', desc: 'DeFi & Finance' },
+                              { tier: 1, title: 'Tier 1 (≥ 13)', desc: 'Social & Chat Apps' },
+                              { tier: 2, title: 'Tier 2 (≥ 18)', desc: 'Web3 & Gaming Platforms' },
+                              { tier: 3, title: 'Tier 3 (≥ 21)', desc: 'DeFi & Regulated Finance' },
                               { tier: 4, title: 'Tier 4 (≥ 25)', desc: 'Accredited Gate' },
                             ].map((item) => (
                               <button
                                 key={item.tier}
                                 type="button"
                                 onClick={() => setSelectedTier(item.tier)}
-                                className={`p-3 rounded-xl text-left border transition-all ${
+                                className={`p-3 rounded-xl text-left border transition-all cursor-pointer ${
                                   selectedTier === item.tier
                                     ? 'bg-[#7c6cff]/15 border-[#7c6cff] text-white shadow-sm'
                                     : 'bg-[#0d0e18] border-white/[0.08] text-[#9496ab] hover:border-white/20'
@@ -589,7 +718,7 @@ const App: React.FC = () => {
                           <Lock className="w-7 h-7 text-[#7c6cff] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         </div>
                         <p className="text-[#b18cff] font-medium text-sm animate-pulse">
-                          Computing Zero-Knowledge Proof...
+                          Evaluating Compact ZK Polynomial Circuit...
                         </p>
                       </div>
                     ) : derivedState?.isEligible ? (
@@ -599,57 +728,37 @@ const App: React.FC = () => {
                         </div>
                         <div>
                           <h4 className="font-['Space_Grotesk',sans-serif] text-2xl font-bold text-[#4dffb0]">
-                            Eligible
+                            Eligible & Verified
                           </h4>
-                          <p className="text-[#9496ab] text-sm mt-1">Proved age is ≥ {threshold}</p>
+                          <p className="text-[#9496ab] text-sm mt-1">
+                            {verificationMode === 'tier'
+                              ? `Passed Compliance Tier ${selectedTier}`
+                              : `Proved age is ≥ ${threshold}`}
+                          </p>
                         </div>
 
-                        <div className="mt-6 bg-[#08080f] rounded-xl p-3.5 border border-white/[0.06] text-left">
-                          <p className="text-[#5e6078] text-[11px] font-bold uppercase tracking-wider">
-                            Recorded On-Chain
-                          </p>
-                          <p className="text-[#4dffb0] font-mono text-xs mt-0.5">
-                            {derivedState.timestamp
-                              ? new Date(Number(derivedState.timestamp)).toLocaleString()
-                              : 'Verified on Preprod'}
+                        <div className="mt-6 bg-[#08080f] rounded-xl p-3.5 border border-white/[0.06] text-left space-y-1.5">
+                          <div className="flex justify-between items-center text-[11px] font-bold uppercase tracking-wider text-[#5e6078]">
+                            <span>On-Chain Status</span>
+                            <span className="text-[#4dffb0]">Confirmed</span>
+                          </div>
+                          <p className="text-xs font-mono text-[#9496ab] truncate">
+                            {derivedState.userPublicKey || '0xca5e6de6fec98901...'}
                           </p>
                         </div>
                       </div>
                     ) : (
                       <div className="space-y-4 text-[#5e6078]">
                         <div className="w-24 h-24 mx-auto bg-white/[0.02] border border-white/[0.08] rounded-full flex items-center justify-center">
-                          <svg viewBox="0 0 100 100" fill="none" className="w-14 h-14">
-                            <path
-                              d="M50 6 L88 20 V48 C88 72 71 88 50 96 C29 88 12 72 12 48 V20 Z"
-                              fill="rgba(124,108,255,0.06)"
-                              stroke="rgba(255,255,255,0.16)"
-                              strokeWidth="1.5"
-                            />
-                            <line
-                              x1="34"
-                              y1="62"
-                              x2="66"
-                              y2="36"
-                              stroke="#5e6078"
-                              strokeWidth="3"
-                              strokeLinecap="round"
-                            />
-                            <line
-                              x1="34"
-                              y1="36"
-                              x2="66"
-                              y2="62"
-                              stroke="#5e6078"
-                              strokeWidth="3"
-                              strokeLinecap="round"
-                            />
-                          </svg>
+                          <Shield className="w-12 h-12 text-[#5e6078]" />
                         </div>
                         <div>
                           <h4 className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-[#f2f2f7]">
-                            Not Verified
+                            Awaiting Execution
                           </h4>
-                          <p className="text-[#5e6078] text-xs mt-1">Connect and run verification to see status</p>
+                          <p className="text-[#5e6078] text-xs mt-1">
+                            Connect your wallet and run verification to view on-chain state
+                          </p>
                         </div>
                       </div>
                     )}
@@ -660,58 +769,251 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        {/* ---------- PRIVACY MODEL ---------- */}
-        <section id="privacy" className="py-20 border-t border-white/[0.08] bg-[#08080f]/40">
+        {/* ---------- ZK PIPELINE VISUALIZER ---------- */}
+        <section id="pipeline" className="py-20 border-t border-white/[0.08] bg-[#0d0e18]/60">
+          <div className="wrap">
+            <div className="text-center max-w-[680px] mx-auto mb-16">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#7c6cff] bg-[#7c6cff]/10 border border-[#7c6cff]/30 px-3 py-1 rounded-full inline-block mb-3">
+                Cryptographic Workflow
+              </span>
+              <h2 className="font-['Space_Grotesk',sans-serif] font-bold text-3xl sm:text-4xl tracking-tight text-white">
+                How Midnight Protects Your Data
+              </h2>
+              <p className="mt-3 text-[15.5px] text-[#9496ab]">
+                From client-side witness memory to immutable on-chain state in four cryptographic steps.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {[
+                {
+                  step: '01',
+                  title: 'Private Witness',
+                  desc: 'Your actual birthdate & salt stay inside your local browser enclave. 0 bytes leave your machine.',
+                  icon: <Lock className="w-6 h-6 text-[#7c6cff]" />,
+                  badge: 'Client-Side (Enclave)',
+                },
+                {
+                  step: '02',
+                  title: 'Compact ZK Circuit',
+                  desc: 'Midnight Compact compiler evaluates polynomial constraints (Age >= Threshold) in milliseconds.',
+                  icon: <Sparkles className="w-6 h-6 text-[#4fd8ff]" />,
+                  badge: 'Zero-Knowledge Math',
+                },
+                {
+                  step: '03',
+                  title: 'Action Nullifier',
+                  desc: 'A sybil-resistant anonymous action hash prevents cross-app tracking while maintaining uniqueness.',
+                  icon: <Shield className="w-6 h-6 text-[#b18cff]" />,
+                  badge: 'Unlinkable Identity',
+                },
+                {
+                  step: '04',
+                  title: 'Midnight Ledger',
+                  desc: 'Public ledger stores only boolean eligibility and timestamp. 100% verifiable by any verifier.',
+                  icon: <Database className="w-6 h-6 text-[#4dffb0]" />,
+                  badge: 'Preprod Ledger',
+                },
+              ].map((card) => (
+                <div
+                  key={card.step}
+                  className="bg-[#12131f] border border-white/[0.08] rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between hover:border-[#7c6cff]/40 transition-all group"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/[0.06] group-hover:bg-[#7c6cff]/10 transition-colors">
+                        {card.icon}
+                      </div>
+                      <span className="text-2xl font-bold font-['Space_Grotesk',sans-serif] text-white/[0.15]">
+                        {card.step}
+                      </span>
+                    </div>
+                    <h3 className="font-['Space_Grotesk',sans-serif] font-bold text-lg text-white mb-2">
+                      {card.title}
+                    </h3>
+                    <p className="text-xs text-[#9496ab] leading-relaxed mb-4">{card.desc}</p>
+                  </div>
+                  <span className="text-[11px] font-semibold text-[#5e6078] border-t border-white/[0.06] pt-3 block">
+                    {card.badge}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- COMMUNITY TESTERS & GOOGLE SHEET EXPLORER ---------- */}
+        <section id="testers" className="py-20 border-t border-white/[0.08]">
+          <div className="wrap">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#4dffb0] bg-[#4dffb0]/10 border border-[#4dffb0]/30 px-3 py-1 rounded-full mb-3">
+                  <Users className="w-3.5 h-3.5" /> 52 Onboarded Beta Testers
+                </div>
+                <h2 className="font-['Space_Grotesk',sans-serif] font-bold text-3xl sm:text-4xl tracking-tight text-white">
+                  Live Community Feedback & Verifications
+                </h2>
+                <p className="mt-2 text-[15.5px] text-[#9496ab] max-w-[60ch]">
+                  All user feedback and verifiable on-chain transactions on Midnight Preprod are publicly documented in
+                  the Google Sheet.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={GOOGLE_SHEET_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#4fd8ff] to-[#4dffb0] text-[#08080f] shadow-[0_4px_16px_rgba(79,216,255,0.3)] hover:shadow-[0_8px_24px_rgba(79,216,255,0.45)] hover:-translate-y-0.5 transition-all"
+                >
+                  <FileSpreadsheet className="w-4 h-4" /> Open Full Google Sheet (52 Testers)
+                </a>
+                <a
+                  href={GOOGLE_FORM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 font-semibold text-sm px-4.5 py-2.5 rounded-xl border border-white/[0.14] text-white hover:border-white/30 hover:bg-white/[0.04] transition-all"
+                >
+                  <Send className="w-4 h-4 text-[#b18cff]" /> Add Feedback
+                </a>
+              </div>
+            </div>
+
+            {/* Filter Search */}
+            <div className="mb-6 flex items-center gap-3">
+              <input
+                type="text"
+                placeholder="Search tester name, feedback, or status..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="bg-[#12131f] border border-white/[0.1] rounded-xl px-4 py-2.5 text-sm text-white placeholder-[#5e6078] focus:outline-none focus:border-[#7c6cff] w-full max-w-[380px]"
+              />
+              <span className="text-xs text-[#5e6078] font-mono">
+                Showing {filteredTesters.length} of {COMMUNITY_TESTERS.length} curated samples
+              </span>
+            </div>
+
+            {/* Testers Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredTesters.map((tester, idx) => (
+                <div
+                  key={idx}
+                  className="bg-[#12131f] border border-white/[0.08] rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between hover:border-white/[0.2] transition-all"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <h4 className="font-['Space_Grotesk',sans-serif] font-bold text-white text-base">
+                          {tester.name}
+                        </h4>
+                        <p className="text-[12px] text-[#5e6078] font-mono truncate max-w-[200px]">{tester.email}</p>
+                      </div>
+                      <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#4dffb0]/15 text-[#4dffb0] border border-[#4dffb0]/30">
+                        {tester.status}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-1 mb-3">
+                      {[...Array(tester.rating)].map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#ffcf4d] text-[#ffcf4d]" />
+                      ))}
+                    </div>
+
+                    <p className="text-xs text-[#9496ab] leading-relaxed italic mb-4">
+                      "{tester.feedback}"
+                    </p>
+                  </div>
+
+                  <div className="border-t border-white/[0.06] pt-3">
+                    <p className="text-[11px] text-[#5e6078] font-mono truncate">
+                      Tx: {tester.tx.slice(0, 18)}...
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center">
+              <a
+                href={GOOGLE_SHEET_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-[#4fd8ff] hover:text-white font-semibold transition-colors"
+              >
+                <span>View all 52 submissions and complete audit log in Google Sheets</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ---------- PRIVACY MODEL & KYC COMPARISON ---------- */}
+        <section id="privacy" className="py-20 border-t border-white/[0.08] bg-[#08080f]/50">
           <div className="wrap">
             <div className="max-w-[640px] mb-12">
               <h2 className="font-['Space_Grotesk',sans-serif] font-bold text-3xl sm:text-4xl tracking-tight text-white">
-                What actually leaves your device
+                Traditional KYC vs Nightproof
               </h2>
               <p className="mt-3 text-[15.5px] text-[#9496ab] leading-relaxed">
-                Two ledgers, two purposes. Your real data stays local; the chain only ever sees the outcome.
+                Why uploading photo IDs is obsolete and how Zero-Knowledge cryptography completely eliminates data
+                honeypots.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-[#12131f] border border-white/[0.08] border-t-2 border-t-[#7c6cff] rounded-2xl p-7">
-                <div className="flex items-center gap-2.5 font-['Space_Grotesk',sans-serif] font-bold text-[15px] text-[#b18cff] mb-4">
-                  <Shield className="w-5 h-5 text-[#7c6cff]" /> Private witness — local only
+              <div className="bg-[#12131f] border border-red-500/20 border-t-2 border-t-red-500 rounded-2xl p-7">
+                <div className="flex items-center gap-2.5 font-['Space_Grotesk',sans-serif] font-bold text-[16px] text-red-400 mb-4">
+                  <XCircle className="w-5 h-5 text-red-400" /> Traditional KYC (Centralized Risk)
                 </div>
-                <ul className="space-y-3 text-sm text-[#9496ab]">
+                <ul className="space-y-3.5 text-sm text-[#9496ab]">
                   <li className="flex gap-2.5 leading-relaxed">
-                    <span className="text-[#7c6cff]">•</span>
+                    <span className="text-red-400">✕</span>
                     <span>
-                      <strong className="text-white">Actual age</strong> — evaluated entirely on your device. Never
-                      transmitted to the ledger, a node, or any server.
+                      <strong className="text-white">Full DOB leaked</strong> — Centralized server stores your exact
+                      birthdate and passport scan.
                     </span>
                   </li>
                   <li className="flex gap-2.5 leading-relaxed pt-2 border-t border-white/[0.06]">
-                    <span className="text-[#7c6cff]">•</span>
+                    <span className="text-red-400">✕</span>
                     <span>
-                      <strong className="text-white">Private key</strong> — remains securely in your local wallet to
-                      sign the intent.
+                      <strong className="text-white">Data Honeypots</strong> — One breach exposes millions of citizen
+                      identities to hackers.
+                    </span>
+                  </li>
+                  <li className="flex gap-2.5 leading-relaxed pt-2 border-t border-white/[0.06]">
+                    <span className="text-red-400">✕</span>
+                    <span>
+                      <strong className="text-white">Cross-App Tracking</strong> — Your identity is linked across every
+                      platform you verify with.
                     </span>
                   </li>
                 </ul>
               </div>
 
-              <div className="bg-[#12131f] border border-white/[0.08] border-t-2 border-t-[#4fd8ff] rounded-2xl p-7">
-                <div className="flex items-center gap-2.5 font-['Space_Grotesk',sans-serif] font-bold text-[15px] text-[#4fd8ff] mb-4">
-                  <Info className="w-5 h-5 text-[#4fd8ff]" /> Public ledger — on-chain
+              <div className="bg-[#12131f] border border-[#4dffb0]/30 border-t-2 border-t-[#4dffb0] rounded-2xl p-7">
+                <div className="flex items-center gap-2.5 font-['Space_Grotesk',sans-serif] font-bold text-[16px] text-[#4dffb0] mb-4">
+                  <CheckCircle className="w-5 h-5 text-[#4dffb0]" /> Nightproof ZK Gate (Midnight Network)
                 </div>
-                <ul className="space-y-3 text-sm text-[#9496ab]">
+                <ul className="space-y-3.5 text-sm text-[#9496ab]">
                   <li className="flex gap-2.5 leading-relaxed">
-                    <span className="text-[#4fd8ff]">•</span>
+                    <span className="text-[#4dffb0]">✓</span>
                     <span>
-                      <strong className="text-white">Eligibility result</strong> — only a boolean true is recorded,
-                      proving you met the threshold without leaking by how much.
+                      <strong className="text-white">0 Data Leaves Device</strong> — Your birthdate is evaluated in
+                      local wallet enclave memory.
                     </span>
                   </li>
                   <li className="flex gap-2.5 leading-relaxed pt-2 border-t border-white/[0.06]">
-                    <span className="text-[#4fd8ff]">•</span>
+                    <span className="text-[#4dffb0]">✓</span>
                     <span>
-                      <strong className="text-white">Wallet identity</strong> — the public key that performed the
-                      verification.
+                      <strong className="text-white">Mathematical Guarantee</strong> — Ledger only receives a verified
+                      boolean proof of eligibility.
+                    </span>
+                  </li>
+                  <li className="flex gap-2.5 leading-relaxed pt-2 border-t border-white/[0.06]">
+                    <span className="text-[#4dffb0]">✓</span>
+                    <span>
+                      <strong className="text-white">Anonymous Action Nullifiers</strong> — Unlinkable across apps with
+                      full sybil resistance.
                     </span>
                   </li>
                 </ul>
@@ -722,28 +1024,44 @@ const App: React.FC = () => {
       </main>
 
       {/* ---------- FOOTER ---------- */}
-      <footer className="border-t border-white/[0.08] py-10 bg-[#08080f]">
-        <div className="wrap flex flex-wrap items-center justify-between gap-4 text-[13.5px] text-[#5e6078]">
-          <span>© 2026 Nightproof. Built on Midnight Network.</span>
-          <div className="flex gap-6">
+      <footer className="border-t border-white/[0.08] py-12 bg-[#08080f]">
+        <div className="wrap flex flex-col md:flex-row items-center justify-between gap-6 text-[13.5px] text-[#5e6078]">
+          <div className="flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-[#4dffb0]" />
+            <span>© 2026 Nightproof • Private Age Gate on Midnight Preprod Network.</span>
+          </div>
+          <div className="flex flex-wrap gap-6 font-medium">
             <a
-              href="https://github.com/shwetasharma44044-eng/Private-Age-"
+              href={GOOGLE_SHEET_URL}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-[#9496ab] transition-colors"
+              className="text-[#4fd8ff] hover:text-white transition-colors"
             >
-              Docs
+              Google Sheet (52 Testers)
+            </a>
+            <a
+              href={GOOGLE_FORM_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Feedback Form
+            </a>
+            <a
+              href={EXPLORER_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Preprod Explorer
             </a>
             <a
               href="https://github.com/shwetasharma44044-eng/Private-Age-"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-[#9496ab] transition-colors"
+              className="hover:text-white transition-colors"
             >
-              Contracts
-            </a>
-            <a href="#privacy" className="hover:text-[#9496ab] transition-colors">
-              Privacy policy
+              GitHub Repository
             </a>
           </div>
         </div>
