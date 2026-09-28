@@ -1,45 +1,104 @@
-# 🛡️ Private Age Gate
+# Private Age Gate — Zero-Knowledge Compliance & Age Verification on Midnight
 
-[![CI Build](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml/badge.svg)](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml)
+<div align="center">
 
-A production-grade decentralized application (**Level 5 - Full Moon Submission**) built on the Midnight Network. The Private Age Gate allows users to cryptographically prove they meet a specific age threshold (e.g., ≥ 18) without ever revealing their actual age, date of birth, or identity.
+  [![CI](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml/badge.svg)](https://github.com/shwetasharma44044-eng/Private-Age-/actions/workflows/ci.yml)
+  ![Midnight](https://img.shields.io/badge/Midnight-Preprod%20Network-6f42c1?style=flat&logo=blockchain&logoColor=white)
+  ![On-Chain Activity](https://img.shields.io/badge/Preprod%20Activity-52%20Verified%20On--Chain%20Users-10b981?style=flat&logo=polkadot&logoColor=white)
+  ![Contracts Tests](https://img.shields.io/badge/Contract%20Tests-10%2F10%20Passing-emerald?style=flat&logo=vitest&logoColor=white)
+  ![Frontend](https://img.shields.io/badge/Frontend-React%20%2B%20Tailwind%20%2B%20Vite-61dafb?style=flat&logo=react&logoColor=white)
+  [![Live DApp](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=flat&logo=vercel&logoColor=white)](https://private-age-jet.vercel.app/)
+  [![X (Twitter)](https://img.shields.io/badge/X-@PrivateAgeweb3-black?style=flat&logo=x&logoColor=white)](https://x.com/PrivateAgeweb3)
+
+  <p align="center">
+    <strong>Production-grade decentralized zero-knowledge age verification gate built natively on the Midnight blockchain using Compact smart contracts, local witness enclaves, and anonymous action nullifiers.</strong>
+  </p>
+
+</div>
 
 ---
 
 > [!IMPORTANT]
 > ### 📊 MANDATORY LEVEL 5 USER FEEDBACK & ONBOARDED USERS GOOGLE SHEET
 > 👉 **[Click Here to Open the Live Google Sheet (52 Onboarded Users & Feedback)](https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing)**  
-> *Contains all 52 verifiable beta testers on Midnight Preprod with names, Gmail IDs, wallet addresses, satisfaction ratings, bug reports, and product suggestions.*
+> *Contains all 52 verifiable beta testers on Midnight Preprod with names, Gmail IDs, on-chain wallet addresses, satisfaction ratings, bug reports, and product suggestions.*
 
 ---
 
-## 🌟 Hackathon Submission (Level 5 - Full Moon)
+## 📋 Submission Checklist (Level 5 — Full Moon)
 
-- **📊 Mandatory User Feedback Google Sheet:** [Open 52 Onboarded Users & Feedback Sheet (Google Sheets)](https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing) 📈 *(MANDATORY for Level 5)*
-- **📝 Community Feedback Survey Form:** [Google Form Survey](https://forms.gle/1UVUCzzTTdDPB5x47) 📋
-- **On-Chain Preprod Contract Address:** `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6` 🔗
-- **Midnight Explorer:** [View Verified On-Chain Contract](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6) 🔍
-- **Live Website:** [View the Deployed Vercel App](https://private-age-jet.vercel.app/) 🌐
-- **Demo Video:** [Watch the working demo here](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA) 🎥
-- **X / Twitter:** [Follow on X (@PrivateAgeweb3)](https://x.com/PrivateAgeweb3) 🐦
-- **👥 52 Preprod Users Ledger:** [USERS.md](./USERS.md) & [docs/USERS.md](./docs/USERS.md)
-- **🔄 User Feedback Loop & Analysis:** [docs/FEEDBACK.md](./docs/FEEDBACK.md) & [FEEDBACK.md](./FEEDBACK.md)
-- **📢 User Acquisition Outreach Messages:** [docs/USER_ACQUISITION.md](./docs/USER_ACQUISITION.md)
-- **Proposal Document:** [PROPOSAL.md](./PROPOSAL.md)
+| Requirement | Status | Evidence / Details |
+|:---|:---:|:---|
+| **Public GitHub repository with documentation** | Done | [shwetasharma44044-eng/Private-Age-](https://github.com/shwetasharma44044-eng/Private-Age-) with full specs, diagrams, and setup instructions. |
+| **Live demo link** | Done | [private-age-jet.vercel.app](https://private-age-jet.vercel.app/) hosted on Vercel with real-time Lace wallet & Preprod interaction. |
+| **Demo video showing full MVP functionality** | Done | [Watch Private Age Gate MVP Demo Walkthrough](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA). |
+| **Contract address (Preprod)** | Done | Preprod [`79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6`](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6) on [Midnight Explorer](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6). |
+| **User feedback in Google Sheet (Mandatory)** | Done | 52 real community tester responses in [Google Sheet Registry](https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing) and [Google Form](https://forms.gle/1UVUCzzTTdDPB5x47). |
+| **List of 50+ Preprod user wallet addresses** | Done | 52 on-chain verifiable testnet transactions documented in [USERS.md](USERS.md) and [docs/USERS.md](docs/USERS.md). |
+| **Feedback documentation & resolved issues** | Done | User feedback analysis, quantitative metrics (NPS: +74), and resolved Git commit hashes in [FEEDBACK.md](FEEDBACK.md). |
+| **Midnight privacy model & dual-state ledger** | Done | Dual-state architecture, private witness memory, and anonymous action nullifiers in [Architecture & Privacy Model](#-architecture--privacy-model). |
+| **Multi-circuit Compact smart contract** | Done | `verifyEligibility`, `verifyDateOfBirthProof`, `verifyTieredAccess`, and `revokeCredential` in [contract/src/age_gate.compact](contract/src/age_gate.compact). |
+| **Automated test suites (10 passing tests)** | Done | 10 unit tests covering DOB bounds, tiered compliance, credential expiry, and revocation in [contract/src/test/age-gate.test.ts](contract/src/test/age-gate.test.ts). |
+| **CI/CD workflow with automated checks** | Done | GitHub Actions [ci.yml](.github/workflows/ci.yml) with automated contract and UI verification checks. |
+| **User acquisition messages** | Done | Social recruitment copy for Discord, X/Twitter, Telegram, and College groups in [USER_ACQUISITION.md](USER_ACQUISITION.md). |
+| **Official Product X Profile & Posts** | Done | Official announcement and channel at [@PrivateAgeweb3](https://x.com/PrivateAgeweb3). |
+| **Minimum 20 meaningful commits** | Done | **120+ structured commits** documenting project evolution from Level 1 to Level 5. |
 
 ---
 
-## 🏛️ Level 5 Contract Architecture & Privacy Model
+## 🌐 Live Demo & Video Walkthrough
+
+* 🌐 **Live Web Application**: [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
+* 🎥 **Video Demo Walkthrough**: [Watch MVP Video Demo](https://photos.app.goo.gl/NW1CeTQCNTADJQFHA)
+* 📊 **Google Sheet (52 Onboarded Users & Feedback)**: [Open Live Spreadsheet](https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing)
+* 🐦 **Official X / Twitter**: [@PrivateAgeweb3](https://x.com/PrivateAgeweb3)
+
+---
+
+## 📜 Deployed Preprod Contract
+
+The `AgeGate` Compact smart contract is deployed to the **Midnight Preprod Network** and fully verifiable on-chain:
+
+| Parameter | Value / Link |
+|:---|:---|
+| **Contract Name** | `AgeGate` (`age_gate.compact`) |
+| **Network** | Midnight Preprod |
+| **Contract Address (Hex)** | `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6` |
+| **Midnight Explorer Link** | [View Verified Contract on Explorer](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6) |
+| **Indexer Endpoint** | `https://indexer.preprod.midnight.network/api/v4/graphql` |
+| **Verified Transactions** | **52 On-Chain User Verifications** (See [USERS.md](USERS.md)) |
+
+---
+
+## 🏛️ Architecture & Privacy Model
 
 The application leverages Midnight's Compact smart contracts with a multi-circuit ZK Identity & Credential architecture:
 
-| Data | Storage | Visibility |
-|------|---------|------------|
-| **User's Actual Age / DOB (Year, Month, Day)** | Local Wallet Enclave (Witness) | 🔒 **Private** (Never leaves client device) |
-| **Master Identity Secret & Salt** | Local Witness Enclave | 🔒 **Private** |
-| **Anonymous Action Nullifier** | Midnight Public Ledger | 🌍 **Public** (Unlinkable Sybil-Resistant ID) |
-| **Eligibility Result & Verified Tier** | Midnight Public Ledger | 🌍 **Public** (Verifiable on-chain) |
-| **Verification Timestamp & Expiry** | Midnight Public Ledger | 🌍 **Public** |
+```mermaid
+flowchart TD
+  subgraph ClientEnclave["🔒 CLIENT-SIDE WITNESS ENCLAVE (Browser / Lace)"]
+    DOB["Secret Date-of-Birth<br/>(Year, Month, Day)"]
+    AGE["Raw Age Witness<br/>(e.g., 21)"]
+    SECRET["Master Identity Secret<br/>(Salt / Nonce)"]
+    EXPIRY["Credential Validity<br/>(Expiry Timestamp)"]
+    PROVER["Midnight Compact Prover<br/>(ZK Polynomial Constraints)"]
+    
+    DOB --> PROVER
+    AGE --> PROVER
+    SECRET --> PROVER
+    EXPIRY --> PROVER
+  end
+
+  subgraph MidnightPreprod["🌍 MIDNIGHT PUBLIC ON-CHAIN LEDGER"]
+    NULLIFIER["nullifier_registry<br/>(Sybil-Resistant Anonymous Hash)"]
+    TIER["nullifier_tier<br/>(Tier 1..4 Compliance)"]
+    TIMESTAMP["verification_timestamp<br/>(On-Chain Record)"]
+    ELIGIBLE["eligible<br/>(Boolean Pass/Fail)"]
+    REVOKED["revoked_nullifiers<br/>(Revocation Blacklist)"]
+  end
+
+  PROVER -->|"Zero-Knowledge Proof (No PII Leak)"| MidnightPreprod
+```
 
 ### ⚡ Level 5 Compact Circuits
 
@@ -60,14 +119,14 @@ The application leverages Midnight's Compact smart contracts with a multi-circui
 
 ---
 
-## 🚀 Setup and Local Run
+## 🚀 Setup & Local Reproduction
 
 ### Prerequisites
 - Node.js 24+
 - Docker (required for `compact` compiler toolchain)
 - Lace Wallet browser extension
 
-### Installation
+### Installation & Run
 1. Clone the repository:
    ```bash
    git clone https://github.com/shwetasharma44044-eng/Private-Age-.git
@@ -77,57 +136,63 @@ The application leverages Midnight's Compact smart contracts with a multi-circui
    ```bash
    npm install
    ```
-3. Compile the contract and build the frontend:
+3. Compile the contract circuits and build frontend:
    ```bash
-   npm run build:start
+   npm run build
    ```
-4. Open the UI at `http://localhost:xxxx` (port will be printed in the terminal).
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
 ---
 
-## 🧪 Testing
+## 🧪 Automated Testing
 
-The project includes strict verification tests ensuring zero privacy leaks.
+The project includes unit and circuit tests verifying zero privacy leaks and exact mathematical bounds.
 
 ```bash
-# Run contract circuit tests
+# Run Compact contract circuit test suite (10 tests)
 npm run test:contract
 
 # Run frontend UI tests
 npm run test:ui
 ```
 
+### Test Suite Execution Output:
+```text
+ ✓ Circuit 1: Standard Age Threshold Verification (verifyEligibility)
+   ✓ allows verification when age is above or equal to threshold
+   ✓ fails verification when age is below threshold
+   ✓ fails verification when credential has expired
+ ✓ Circuit 2: Date-of-Birth Calendar Proof (verifyDateOfBirthProof)
+   ✓ verifies user whose 18th birthday is today or earlier
+   ✓ fails verification when user has not yet reached their birthday this year
+   ✓ accurately handles exact boundary day matching
+ ✓ Circuit 3: Multi-Tier Access (verifyTieredAccess)
+   ✓ allows Tier 1 (13+) for a 14 year old
+   ✓ allows Tier 3 (21+) for a 22 year old and rejects Tier 4 (25+)
+ ✓ Circuit 4: Revocation Management (revokeCredential)
+   ✓ revokes a nullifier and prevents subsequent verifications
+ ✓ Privacy & Zero-Knowledge Verification Guarantee
+   ✓ ensures zero leak of private birthdate or secret keys to public ledger state
+
+Test Files: 1 passed (1)
+Tests: 10 passed (10)
+```
+
 ---
 
 ## 📸 Screenshots & Proof of Work
 
-### 1. User Interface (UI)
+### 1. Interactive DApp Interface & Community Testers Explorer
 ![UI Screenshot](image.png)
 
-### 2. CI/CD Pipeline Success
+### 2. CI/CD Pipeline Automated Checks
 ![CI/CD Pipeline Success](image-3.png)
 
-### 3. Test Outputs
+### 3. Contract Circuit Verification Outputs
 ![Test Outputs](image-2.png)
-
----
-
-## 📝 Contract Address
-
-- **Environment:** Midnight Preprod
-- **Deployed Contract Address (Preprod):** `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6`
-- **Explorer Contract Link:** [https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
-- **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
-
----
-
-## 🌕 Level 5 Milestones (Full Moon)
-
-- **📊 Mandatory Google Sheet Submitted:** Comprehensive user feedback & onboarded user list live at [Google Sheet Link](https://docs.google.com/spreadsheets/d/1Co11YVtVtqe5wlQQ6sB6nmK5wng1HXk2zy4FJZdsl9g/edit?usp=sharing).
-- **👥 52 Preprod Beta Testers:** Successfully onboarded 52 verifiable user transactions on Midnight Preprod network with 100% ZK proof verification success. See [USERS.md](./USERS.md).
-- **🔄 Structured Feedback Loop:** Collected detailed feedback across 52 users (NPS: +74, 96% satisfaction) and implemented UI/UX improvements (visual proof badges, error resilience, privacy explainer). See [docs/FEEDBACK.md](./docs/FEEDBACK.md).
-- **📢 User Acquisition:** Drafted targeted messages for Discord, X/Twitter, Telegram, and College groups in [docs/USER_ACQUISITION.md](./docs/USER_ACQUISITION.md).
-- **📈 Minimum 20 Commits:** Over 120+ meaningful, structured commits documenting the evolution from Level 1 to Level 5.
 
 ---
 
@@ -135,6 +200,6 @@ npm run test:ui
 
 - **Author / Developer:** Shweta Sharma
 - **GitHub Profile:** [@shwetasharma44044-eng](https://github.com/shwetasharma44044-eng)
-- **Twitter / X Profile:** [https://x.com/PrivateAgeweb3](https://x.com/PrivateAgeweb3)
+- **Twitter / X Profile:** [@PrivateAgeweb3](https://x.com/PrivateAgeweb3)
 - **GitHub Repository:** [Private-Age-](https://github.com/shwetasharma44044-eng/Private-Age-)
 - **Live Website:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
