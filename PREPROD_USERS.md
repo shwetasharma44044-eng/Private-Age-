@@ -3,7 +3,8 @@
 This document contains the verified on-chain activity log of **52 unique user verifications** executed against the deployed **AgeGate** contract on **Midnight Preprod Network**.
 
 - **Deployed Contract Address:** `79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6`
-- **Midnight Explorer:** [View On-Chain Contract](https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
+- **Midnight Explorer (Preprod):** [View Contract on Midnight Explorer](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
+- **Subscan Explorer (Preprod):** [View Contract on Subscan](https://midnight-preprod.subscan.io/contract/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
 - **Circuit Verified:** `verifyEligibility(user, threshold, timestamp)`
 - **ZK Prover Engine:** Midnight HTTP Proof Server + Node Wallet Facade
 

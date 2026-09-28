@@ -10,7 +10,7 @@ This document contains ready-to-use communication templates for recruiting beta 
 - **Links to Include:**
   - 🌐 **Live dApp:** [https://private-age-jet.vercel.app/](https://private-age-jet.vercel.app/)
   - 📋 **Feedback Form:** [https://forms.gle/1UVUCzzTTdDPB5x47](https://forms.gle/1UVUCzzTTdDPB5x47)
-  - 📊 **Explorer Contract:** [https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6](https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
+  - 📊 **Explorer Contract:** [https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6](https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6)
 
 ---
 
@@ -48,7 +48,7 @@ Prove you meet age requirements (e.g. 18+) without EVER revealing your birthdate
 Try it now & share feedback:
 🌐 Live dApp: https://private-age-jet.vercel.app/
 📝 30-sec Feedback Form: https://forms.gle/1UVUCzzTTdDPB5x47
-🔍 Preprod Explorer: https://preprod.midnight.network/contract/79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6
+🔍 Preprod Explorer: https://preprod.midnightexplorer.com/contracts/0x79346a13d2544938966e81c3723d594d2ff2b3d8f3321d21a40f3692125ff6f6
 
 Built with Compact smart contracts & Lace Wallet. Feedback welcome! 💬👇
 #MidnightNetwork #ZeroKnowledge #Web3Privacy #Cardano #ZK
